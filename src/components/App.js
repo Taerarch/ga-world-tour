@@ -29,10 +29,23 @@ class App extends Component {
 
   render(){
     return (
-    <div className="App">
-      {this.state.user ? (<Home/>) : (<User/>)}
-    </div>
 
+      <div className="App">
+        {this.state.user ? (<Home/>) : (<User/>)}
+      </div>
+
+      // <Router>
+      //   <div>
+      //     <Nav />
+      //     <Switch>
+      //       <Route path="/" exact component ={Home} />
+      //       <Route path="/user" component ={User} />
+      //     </Switch>
+
+      //     {this.state.user ? (<Home/>) : (<User/>)}
+      //   </div>
+
+      // </Router>
     );
   }
 
