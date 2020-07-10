@@ -8,6 +8,7 @@ constructor(props){
     this.state={
     }
 }
+
 logout(){
     fire.auth().signOut();
 }
@@ -15,9 +16,9 @@ logout(){
     render() {
         return (
             <div>
-                <h1>You are logged in.</h1>
-                <button onClick={this.logout}>Logout</button>
-                <Map />
+              <h1>You are logged in {this.props.user.email}</h1>
+              <button onClick={this.logout}>Logout</button>
+              <Map />
             </div>
         )
     }

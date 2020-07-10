@@ -31,21 +31,9 @@ class App extends Component {
     return (
 
       <div className="App">
-        {this.state.user ? (<Home/>) : (<User/>)}
+        {this.state.user ? (<Home user={this.state.user}/>) : (<User/>)}
       </div>
 
-      // <Router>
-      //   <div>
-      //     <Nav />
-      //     <Switch>
-      //       <Route path="/" exact component ={Home} />
-      //       <Route path="/user" component ={User} />
-      //     </Switch>
-
-      //     {this.state.user ? (<Home/>) : (<User/>)}
-      //   </div>
-
-      // </Router>
     );
   }
 
