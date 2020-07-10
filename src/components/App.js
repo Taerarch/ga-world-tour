@@ -1,24 +1,50 @@
-import React from 'react';
+import React, { Component } from 'react';
 import Nav from './Nav'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
-import Signup from './Signup';
-import Login from './Login';
+import User from './User';
 import Home from './Home';
+import fire from './fire'
 
-function App() {
-  return (
-    <Router>
-      <div>
-        <Nav />
-        <Switch>
-          <Route path="/" exact component ={Home} />
-          <Route path="/signup" component ={Signup} />
-          <Route path="/login" component ={Login} />
-        </Switch>
-      </div>
+class App extends Component {
+  constructor(props){
+    super(props)
+    this.state={
+      user: []
+    }
+  }
+  componentDidMount(){
+    this.authListener()
+  }
 
-    </Router>
-  );
+  authListener(){
+    fire.auth().onAuthStateChanged((user) =>{
+      if(user){
+        this.setState({user})
+      }
+      else{
+        this.setState({user: null})
+      }
+    })
+  }
+
+  render(){
+    return (
+      
+      <Router>
+        <div>
+          <Nav />
+          <Switch>
+            <Route path="/" exact component ={Home} />
+            <Route path="/user" component ={User} />
+          </Switch>
+
+          {/* {this.state.user ? (<Home/>) : (<User/>)} */}
+        </div>
+
+      </Router>
+    );
+  }
+
 }
 
 export default App;
