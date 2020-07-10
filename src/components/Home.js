@@ -5,8 +5,7 @@ import fire from './fire'
 class Home extends Component {
 constructor(props){
     super(props)
-    this.super={
-
+    this.state={
     }
 }
 logout(){

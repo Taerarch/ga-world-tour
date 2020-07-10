@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import fire from './fire';
 
-class Login extends Component {
+class User extends Component {
 
     constructor(){
         super();
@@ -39,6 +39,7 @@ class Login extends Component {
     render() {
         return (
             <div>
+            {if (!this.state.email) {{console.log("hello")}}  }
                 <form>
                     <input
                         type="email"
@@ -59,10 +60,10 @@ class Login extends Component {
                     <button onClick={this.login}>Login</button>
                     <button onClick={this.signup}>Signup</button>
                 </form>
-                
+
             </div>
         )
     }
 }
 
-export default Login;
+export default User;

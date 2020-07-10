@@ -12,7 +12,7 @@ function Nav() {
             <h3>GA World Tour</h3>
             <ul className="nav-links">
                 <Link style={navStyle} to="/">
-                    <li>Home</li>   
+                    <li>Home</li>
                 </Link>
 
                 <Link style={navStyle} to="/user">

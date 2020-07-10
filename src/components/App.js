@@ -9,7 +9,7 @@ class App extends Component {
   constructor(props){
     super(props)
     this.state={
-      user: []
+      user: {}
     }
   }
   componentDidMount(){
@@ -29,19 +29,10 @@ class App extends Component {
 
   render(){
     return (
-      
-      <Router>
-        <div>
-          <Nav />
-          <Switch>
-            <Route path="/" exact component ={Home} />
-            <Route path="/user" component ={User} />
-          </Switch>
+    <div className="App">
+      {this.state.user ? (<Home/>) : (<User/>)}
+    </div>
 
-          {/* {this.state.user ? (<Home/>) : (<User/>)} */}
-        </div>
-
-      </Router>
     );
   }
 
