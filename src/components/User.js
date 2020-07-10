@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import fire from './fire';
+import Video from './Video'
 
 class Login extends Component {
 
@@ -66,7 +67,7 @@ class Login extends Component {
                     <button onClick={this.signup}>Signup</button>
                     <h3>{this.state.message}</h3>
                 </form>
-
+                <Video />
             </div>
         )
     }

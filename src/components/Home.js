@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Map from './Map'
+import Map from './WorldMap'
 import fire from './fire'
 
 class Home extends Component {
@@ -9,6 +9,7 @@ constructor(props){
 
     }
 }
+
 logout(){
     fire.auth().signOut();
 }
@@ -16,10 +17,11 @@ logout(){
     render() {
         return (
             <div>
-                {console.log(this.state.user.email)}
-                <h1>Welcome {this.state.user}.</h1>
+              <div className="nav">
+                <h1>You are logged in {this.props.user.email}</h1>
                 <button onClick={this.logout}>Logout</button>
-                <Map />
+              </div>
+              <Map />
             </div>
         )
     }
