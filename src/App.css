@@ -1,7 +1,12 @@
+
 svg {
-  display: block;
   width: 100%;
   height: 300px;
+}
+
+.svg-map {
+  width: 80%;
+  margin: 2em;
 }
 
 svg .country:hover {
@@ -15,8 +20,7 @@ svg .country:hover {
   flex-direction: column;
   align-items: stretch;
   justify-content: center;
-  height: 100vh;
-  padding: 0 50px 150px;
+  padding: 0;
   text-align: center;
   box-sizing: border-box;
 }
@@ -38,6 +42,7 @@ video {
 
 .App {
   text-align: center;
+  margin-top: 3em;
 }
 
 nav{
