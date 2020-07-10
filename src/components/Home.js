@@ -5,7 +5,7 @@ import fire from './fire'
 class Home extends Component {
 constructor(props){
     super(props)
-    this.super={
+    this.state={
 
     }
 }
@@ -16,7 +16,8 @@ logout(){
     render() {
         return (
             <div>
-                <h1>You are logged in.</h1>
+                {console.log(this.state.user.email)}
+                <h1>Welcome {this.state.user}.</h1>
                 <button onClick={this.logout}>Logout</button>
                 <Map />
             </div>
