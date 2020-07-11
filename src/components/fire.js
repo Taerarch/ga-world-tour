@@ -1,6 +1,7 @@
 import * as firebase from 'firebase';
+import "firebase/storage"
 
-var firebaseConfig = {
+const firebaseConfig = {
     apiKey: "AIzaSyDueuzkaY1w2R8SiEqgAR8lSXzFL58O4-U",
     authDomain: "ga-world-tour-b8252.firebaseapp.com",
     databaseURL: "https://ga-world-tour-b8252.firebaseio.com",
@@ -11,5 +12,6 @@ var firebaseConfig = {
   };
 
   const fire = firebase.initializeApp(firebaseConfig)
+  const storage = firebase.storage()
   // Initialize Firebase
-  export default fire;
+  export {storage, fire as default};

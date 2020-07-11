@@ -1,6 +1,7 @@
 import React from 'react'
 import Webcam from "react-webcam";
 import ReactDOM from 'react-dom'
+import {storage} from './fire'
 
 const WebcamCapture = () => {
     const webcamRef = React.useRef(null);
@@ -15,14 +16,15 @@ const WebcamCapture = () => {
       <>
         <Webcam
             id= "webcam"
-          audio={false}
-          ref={webcamRef}
-          screenshotFormat="image/jpeg"
+            audio={false}
+            ref={webcamRef}
+            screenshotFormat="image/jpeg"
         />
         <button onClick={capture}>Capture photo</button>
         {imgSrc && (
-          <img
-            src={imgSrc}
+            <img
+              src={imgSrc}
+              id="image"
           />
         )}
       </>
