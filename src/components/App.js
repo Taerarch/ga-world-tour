@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import Nav from './Nav';
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Nav from './Nav'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
 import User from './User';
 import Home from './Home';
-import fire from './fire';
+import fire from './fire'
 
 class App extends Component {
   constructor(props){
