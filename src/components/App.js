@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+// eslint-disable-next-line
 import Nav from './Nav';
+// eslint-disable-next-line
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import User from './User';
 import Home from './Home';
@@ -29,11 +31,12 @@ class App extends Component {
 
   render(){
     return (
-
+      
       <div className="App">
+       
         {this.state.user ? (<Home user={this.state.user}/>) : (<User/>)}
       </div>
-
+      
     );
   }
 

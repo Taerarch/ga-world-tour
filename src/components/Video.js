@@ -1,6 +1,7 @@
 import React from 'react'
 import Webcam from "react-webcam";
 import ReactDOM from 'react-dom'
+// eslint-disable-next-line
 import {storage} from './fire'
 
 const WebcamCapture = () => {
@@ -25,6 +26,7 @@ const WebcamCapture = () => {
             <img
               src={imgSrc}
               id="image"
+              alt= "profile"
           />
         )}
       </>

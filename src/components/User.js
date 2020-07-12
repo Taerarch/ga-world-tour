@@ -19,10 +19,8 @@ class Login extends Component {
     login(e){
         e.preventDefault();
         fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then((u)=>{
-            console.log(u)
             this.setState({message: u.message})
         }).catch((err)=>{
-            console.log(err);
             this.setState({message: err.message})
             
         })
@@ -30,10 +28,8 @@ class Login extends Component {
     signup(e){
         e.preventDefault();
         fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.password).then((u)=>{
-            console.log(u)
             this.setState({message: u.message})
         }).catch((err)=>{
-            console.log(err);
             this.setState({message: err.message})
         })
     }
@@ -67,7 +63,6 @@ class Login extends Component {
                     <button onClick={this.signup}>Signup</button>
                     <h3>{this.state.message}</h3>
                 </form>
-                <Video />
             </div>
         )
     }
