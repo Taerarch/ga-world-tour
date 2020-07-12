@@ -17,7 +17,7 @@ logout(){
     render() {
         return (
             <div>
-              <div class="nav">
+              <div className="nav">
                 <h1>You are logged in {this.props.user.email}</h1>
                 <button onClick={this.logout}>Logout</button>
               </div>

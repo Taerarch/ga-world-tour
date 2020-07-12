@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
-import Nav from './Nav'
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+// eslint-disable-next-line
+import Nav from './Nav';
+// eslint-disable-next-line
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import User from './User';
 import Home from './Home';
 import fire from './fire'
@@ -31,6 +33,7 @@ class App extends Component {
     return (
 
       <div className="App">
+
         {this.state.user ? (<Home user={this.state.user}/>) : (<User/>)}
       </div>
 
