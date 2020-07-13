@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
 import fire from './fire';
+<<<<<<< HEAD
+// eslint-disable-next-line
+import Video from './Video';
+=======
+>>>>>>> 285862a12beb94435d3f6a388f612004b310c92b
 
 class Login extends Component {
-
         constructor(props)
     {
         super(props);
@@ -21,7 +25,7 @@ class Login extends Component {
             this.setState({message: u.message})
         }).catch((err)=>{
             this.setState({message: err.message})
-            
+
         })
     }
     signup(e){
