@@ -20,6 +20,14 @@ const WebcamCapture = () => {
     }
   };
 
+  const download = () => {
+    const uploadTask = storage.ref(`images/profile`);
+      uploadTask.getDownloadURL().then((dlUrl)=>{
+        setUrl(dlUrl)
+        //grap a refcence to the user and attach to him
+      })
+  }
+
   return (
     <>
       <Webcam
@@ -29,6 +37,7 @@ const WebcamCapture = () => {
           screenshotFormat="image/jpeg"
       />
       <button onClick={capture}>Capture photo</button>
+      <button onClick={download}>Get photo</button>
       
       <img
         src={url || "http://via.placeholder.com/300"}
