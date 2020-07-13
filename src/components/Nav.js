@@ -15,8 +15,8 @@ function Nav() {
                     <li>Home</li>
                 </Link>
 
-                <Link style={navStyle} to="/user">
-                    <li>User</li>
+                <Link style={navStyle} to="/video">
+                    <li>Video</li>
                 </Link>
             </ul>
         </nav>

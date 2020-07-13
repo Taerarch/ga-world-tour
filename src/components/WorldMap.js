@@ -7,6 +7,7 @@ import 'react-svg-map/src/svg-map.scss'
 import WorldInfo from '../MapUtilities/MapInfo.js'
 
 
+<<<<<<< HEAD
 
 class WorldMap extends Component {
   constructor() {
@@ -18,6 +19,11 @@ class WorldMap extends Component {
     }
     this._handleCountry = this._handleCountry.bind(this);
     this._handleMouseOver = this._handleMouseOver.bind(this);
+=======
+function WorldMap () {
+  // eslint-disable-next-line
+  const [property, setProperty] = useState("pop_est");
+>>>>>>> 3e9f81ffa9d4cb2dcc6b58ae0e9b8f01bc662461
 
     const getAllCountries = () => {
       console.log(WorldInfo.worldInfo.locations);
