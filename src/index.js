@@ -3,9 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import Nav from './components/Nav';
-// eslint-disable-next-line
-import Home from './components/Home';
-
 import Video from './components/Video';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';

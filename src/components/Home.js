@@ -7,7 +7,6 @@ const WEEZER_URL = 'https://rest.bandsintown.com/artists/weezer/events?app_id=d2
 // const BANDS_URL = "https://rest.bandsintown.com/artists/" + str(artistName)
 //     newurl = url + "/events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=upcoming"
 
-
 class Home extends Component {
   constructor(props){
       super(props)
@@ -43,13 +42,6 @@ class Home extends Component {
   }
 
     render() {
-
-      function formatDate(string) {
-      var options = { year: 'numeric' };
-      return new Date(string).toLocaleDateString([], options);
-    }
-// Print a list of all the Weezer gigs in 2015
-// Filter the datetime's of all the tours selected with 2015
         return (
             <div>
               <div className="nav">

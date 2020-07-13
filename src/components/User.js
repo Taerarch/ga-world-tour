@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import fire from './fire';
-// eslint-disable-next-line
-import Video from './Video';
 
 class Login extends Component {
         constructor(props)
