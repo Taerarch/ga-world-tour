@@ -9,35 +9,38 @@ const WEEZER_URL = 'https://rest.bandsintown.com/artists/weezer/events?app_id=d2
 
 
 class Home extends Component {
-constructor(props){
-    super(props)
-    this.state={
-      tours: [],
-      time: []
-    }
+  constructor(props){
+      super(props)
+      this.state={
+        tours: [],
+        time: [],
+        artistName: ''
+      }
+      this.saveSearch = this.saveSearch.bind(this);
 
+      const fetchTours = () => {
+        axios.get(WEEZER_URL).then((results) => {
+          this.setState({ tours: results.data })
+          setTimeout(fetchTours, 6000);
+        })
+      }
+      fetchTours();
 
-    const fetchTours = () => {
-      axios.get(WEEZER_URL).then((results) => {
-        this.setState({ tours: results.data })
-        setTimeout(fetchTours, 6000);
-      })
-    }
-    fetchTours();
+      const fetchTourTime = () => {
+        axios.get(WEEZER_URL).then((results) => {
+          this.setState({ time: results.data[100].datetime })
+          setTimeout(fetchTours, 6000);
+        })
+      }
+      fetchTourTime();
+  }
 
-    const fetchTourTime = () => {
-      axios.get(WEEZER_URL).then((results) => {
-        this.setState({ time: results.data[100].datetime })
-        setTimeout(fetchTours, 6000);
-      })
-    }
-    fetchTourTime();
-}
-
-
-logout(){
-    fire.auth().signOut();
-}
+  logout(){
+      fire.auth().signOut();
+  }
+  saveSearch(artistName) {
+    this.setState({artistName: artistName})
+  }
 
     render() {
 
@@ -51,10 +54,7 @@ logout(){
             <div>
               <div className="nav">
                 <h1>You are logged in {this.props.user.email}</h1>
-                <h2>The tour's at {formatDate(this.state.time)}</h2>
-                {this.state.tours.filter(t => formatDate(t.datetime) === '2015').map(tours_filtered => (
-                  <p>{tours_filtered.venue.country} {formatDate(tours_filtered.datetime)} </p>
-                ))}
+                <Search onSubmit={this.saveSearch}/>
                 <button onClick={this.logout}>Logout</button>
               </div>
               <Map />
@@ -62,5 +62,20 @@ logout(){
         )
     }
 }
-
+class Search extends Component {
+  constructor() {
+    super();
+    this.state = {}
+  }
+  render() {
+    return (
+      <div id="search">
+        <form onSubmit={this._handleSubmit}>
+          <label for="year">Year: </label>
+          <input type="text" id="year" name="year"></input>
+        </form>
+      </div>
+    )
+  }
+}
 export default Home;
