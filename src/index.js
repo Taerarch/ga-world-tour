@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App';
 import Nav from './components/Nav';
-import Home from './components/Home';
 import Video from './components/Video';
 import * as serviceWorker from './serviceWorker';
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
@@ -15,18 +14,18 @@ ReactDOM.render(
     <Router>
       <div>
         <Nav />
-        
+
         <Switch>
-          
+
           <App path="/" exact component ={App} />
           <Route path="/video" exact component ={Video} />
-          
+
         </Switch>
       </div>
 
     </Router>
-    
-    
+
+
   </React.StrictMode>,
   document.getElementById('root')
 );
