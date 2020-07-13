@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import fire from './fire';
-import Video from './Video'
 
 class Login extends Component {
 

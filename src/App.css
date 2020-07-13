@@ -71,6 +71,6 @@ nav{
   object-fit: cover;
   width:300px;
   height:300px;
-  box-shadow: 0px 20px 15px grey;
+  box-shadow: 0px 10px 20px grey;
   border-style: double;
 }
