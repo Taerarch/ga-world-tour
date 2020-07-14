@@ -1,4 +1,4 @@
-import React, { useState, Component } from 'react';
+import React, { Component } from 'react';
 import World from '@svg-maps/world';
 import { CheckboxSVGMap } from 'react-svg-map';
 import 'react-svg-map/lib/index.css'

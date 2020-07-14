@@ -2,7 +2,7 @@ import React from 'react'
 import '../App.css'
 import {Link} from 'react-router-dom'
 
-function Nav() {
+function Nav(props) {
     const navStyle={
         color: 'white'
     }
@@ -15,9 +15,13 @@ function Nav() {
                     <li>Home</li>
                 </Link>
 
-                <Link style={navStyle} to="/video">
-                    <li>Video</li>
-                </Link>
+                {props.user 
+                ? (<Link style={navStyle} to="/profile">
+                        <li>Profile</li>
+                    </Link>) 
+                : null}
+
+                
             </ul>
         </nav>
     )

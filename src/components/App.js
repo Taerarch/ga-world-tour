@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-// eslint-disable-next-line
-import Nav from './Nav';
-// eslint-disable-next-line
-import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import User from './User';
 import Home from './Home';
+import Nav from './Nav';
+import Video from './Video';
 import fire from './fire'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+
 
 class App extends Component {
   constructor(props){
@@ -33,7 +33,21 @@ class App extends Component {
     return (
 
       <div className="App">
-        {this.state.user ? (<Home user={this.state.user}/>) : (<User/>)}
+        <Router>
+          <div>
+            <Nav user={this.state.user}/>
+
+            <Switch>
+              {this.state.user 
+                ? (<Route path="/" exact component={()=><Home user={this.state.user}/>} />) 
+                : (<Route path="/" exact component={User} />)}
+              <Route path="/profile" exact component ={()=><Video user={this.state.user}/>} />
+
+            </Switch>
+          </div>
+
+        </Router>
+
       </div>
 
     );
