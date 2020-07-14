@@ -35,13 +35,13 @@ class App extends Component {
       <div className="App">
         <Router>
           <div>
-            <Nav />
+            <Nav user={this.state.user}/>
 
             <Switch>
               {this.state.user 
                 ? (<Route path="/" exact component={()=><Home user={this.state.user}/>} />) 
                 : (<Route path="/" exact component={User} />)}
-              <Route path="/video" exact component ={()=><Video user={this.state.user}/>} />
+              <Route path="/profile" exact component ={()=><Video user={this.state.user}/>} />
 
             </Switch>
           </div>

@@ -9,7 +9,7 @@ const WebcamCapture = (props) => {
 
   const webcamRef = React.useRef(null);
   const [url, setUrl] = React.useState("");
-
+  
   
 // app
 //   .database()
@@ -28,10 +28,12 @@ const WebcamCapture = (props) => {
 
   const download = () => {
     const uploadTask = storage.ref(`images/${props.user.uid}`);
+    if (uploadTask !== null){
       uploadTask.getDownloadURL().then((dlUrl)=>{
         setUrl(dlUrl)
         //grap a refcence to the user and attach to him
       })
+    }
   }
 
   return (
