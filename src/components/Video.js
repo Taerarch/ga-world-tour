@@ -2,8 +2,6 @@ import React from 'react'
 import Webcam from "react-webcam";
 import ReactDOM from 'react-dom'
 import {storage} from './fire'
-import fire from './fire'
-import app from 'firebase/app'
 
 const WebcamCapture = (props) => {
 

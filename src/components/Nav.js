@@ -3,8 +3,6 @@ import '../App.css'
 import {Link} from 'react-router-dom'
 import Avatar from 'react-avatar';
 import {storage} from './fire'
-import pic1 from './pic.jpg'
-
 
 function Nav(props) {
     const navStyle={
@@ -12,28 +10,30 @@ function Nav(props) {
     }
     const [dlUrl, setUrl] = React.useState("");
 
-    const uploadTask = storage.ref(`images/${props.user.uid}`);
+    let uploadTask = null;
+    if (props.user !== null){
+        uploadTask = storage.ref(`images/${props.user.uid}`);
+    }
     if (uploadTask !== null){
         uploadTask.getDownloadURL().then((dlUrl)=>{
-          setUrl("URL is : "+dlUrl)
+          setUrl(dlUrl)
           //grap a refcence to the user and attach to him
         })
       }
-    console.log(dlUrl)
+    console.log("URL is : "+dlUrl)
     return (
         <nav>
-            <h3>GA World Tour</h3>
             <ul className="nav-links">
                 <Link style={navStyle} to="/">
-                    <li>Home</li>
+                    <li className="home_nav" >GA World Tour</li>
                 </Link>
 
                 {props.user 
-                ? (<Link style={navStyle} to="/profile">
-                        <li>Profile</li>
+                ? (<Link  style={navStyle} to="/profile">
+                        <Avatar src={dlUrl} size={100} round={true}  />
                     </Link>) 
                 : null}
-                <Avatar icon="user" src="./pic.jpg" size={70} round={true}  />
+                
                 
             </ul>
         </nav>
