@@ -69,10 +69,15 @@ class WorldMap extends Component {
   _mapTourCountry() {
     const countryArray = this.props.tourCountries.map((country) => {return country.venue.country})
     const filterCountryArray = _.uniq(countryArray)
-    filterCountryArray.map((c) => {
-      _.throttle(this._handleColorCountry(c), 3000)
-    })
+    const colourCountries = (index = 0) => {
+      if (index !== filterCountryArray.length - 1) {
+        this._handleColorCountry(filterCountryArray[index])
+        setTimeout(() => colourCountries(index + 1), 3000)
+      }
+    }
+    colourCountries()
   }
+
 
 
 
