@@ -38,25 +38,28 @@ class Home extends Component {
   saveSearch(band, year) {
     this.setState({band: band, year: year})
   }
-
   render() {
-    function formatDate(string) {
+    function formatToYear(string) {
       var options = { year: 'numeric' };
       return new Date(string).toLocaleDateString([], options);
     }
+    function formatDate(string) {
+      var options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(string).toLocaleDateString([], options);
+    }
+    // Input the countries into WorldMap
+    // Function to use the select country function and refresh the map
+    // Problems: Selected multiple times might cause a problem
+
     return (
       <div>
         <div className="nav">
           <h1>You are logged in {this.props.user.email}</h1>
           <Search onSubmit={this.saveSearch} tours={this.state.tours}/>
 
-          {this.state.tours.filter(t => formatDate(t.datetime) === `${this.state.year}`).map(tours_filtered => (
-            <p>{tours_filtered.venue.country} {formatDate(tours_filtered.datetime)} </p>
-          ))}
-
           <button onClick={this.logout}>Logout</button>
         </div>
-        <Map />
+        <Map tourCountries={this.state.tours.filter(t => formatToYear(t.datetime) === `${this.state.year}`)} />
       </div>
     )
   }
@@ -67,7 +70,7 @@ class Search extends Component {
     super();
     this.state = { year: "" }
     this._handleChangeBand = this._handleChangeBand.bind(this);
-    this._handleChangeYear = this._handleChangeYear.bind(this);
+    this._handleChangeTime = this._handleChangeTime.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
@@ -75,7 +78,7 @@ class Search extends Component {
     this.setState({band: event.target.value});
   }
 
-  _handleChangeYear(event) {
+  _handleChangeTime(event) {
     this.setState({year: event.target.value})
   }
   _handleSubmit(event) {
@@ -91,7 +94,7 @@ class Search extends Component {
           <input type="text" id="band" name="band" onChange={this._handleChangeBand} value={this.state.content} required></input>
 
           <label for="year">Year: </label>
-          <input type="integer" id="year" name="year" onChange={this._handleChangeYear} value={this.state.content} required></input>
+          <input type="integer" id="year" name="year" onChange={this._handleChangeTime} value={this.state.content} required></input>
 
           <input type="submit" value="Search"></input>
         </form>

@@ -6,12 +6,13 @@ import { getLocationName } from './MapFunctions';
 import 'react-svg-map/src/svg-map.scss'
 import WorldInfo from '../MapUtilities/MapInfo.js'
 import '../App.css'
+import _ from 'underscore'
 
 
 
 class WorldMap extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       allCountries: WorldInfo.worldInfo.locations,
       country: '',
@@ -24,6 +25,9 @@ class WorldMap extends Component {
     this._handleLocationBlur = this._handleLocationBlur.bind(this);
     this._handleOnChange = this._handleOnChange.bind(this);
     this._handleColorCountry = this._handleColorCountry.bind(this);
+    this._mapTourCountry = this._mapTourCountry.bind(this);
+
+
   }
 
 
@@ -55,18 +59,27 @@ class WorldMap extends Component {
 		});
 	}
 
-  _handleColorCountry(countryId) {
-    console.log(countryId.target.value, 'aqui')
-    let country = document.getElementById(countryId.target.value);
-    console.log(country, 'alla')
+  _handleColorCountry(tourCountry) {
+    const allCountries = this.state.allCountries.filter(country => country.name === tourCountry)
+    const country = document.getElementById(allCountries[0].id); //get the toured countries,
     country.style.fill = 'orange';
   }
+
+
+  _mapTourCountry() {
+    const countryArray = this.props.tourCountries.map((country) => {return country.venue.country})
+    const filterCountryArray = _.uniq(countryArray)
+    filterCountryArray.map((c) => {
+      _.throttle(this._handleColorCountry(c), 3000)
+    })
+  }
+
 
 
   render() {
     return (
       <div>
-        <select onChange={this._handleColorCountry}>
+        <select onChange={this._mapTourCountry}>
           {this.state.allCountries.map((country) => <option key={country.id} value={country.id}>{country.name}</option>)}
         </select>
         <CheckboxSVGMap map={World}

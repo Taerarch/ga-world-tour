@@ -17,7 +17,8 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "react-svg-map": "^2.1.2",
-    "react-webcam": "^5.2.0"
+    "react-webcam": "^5.2.0",
+    "underscore": "^1.10.2"
   },
   "scripts": {
     "start": "react-scripts start",
