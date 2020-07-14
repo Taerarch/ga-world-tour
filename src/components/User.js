@@ -2,16 +2,15 @@ import React, { Component } from 'react'
 import fire from './fire';
 
 class Login extends Component {
-        constructor(props)
-    {
-        super(props);
-        this.login = this.login.bind(this);
-        this.handleChange = this.handleChange.bind(this);
-        this.signup = this.signup.bind(this);
-        this.state={
-            email : "",
-            password : "",
-            message: ""
+    constructor(props){
+    super(props);
+    this.login = this.login.bind(this);
+    this.handleChange = this.handleChange.bind(this);
+    this.signup = this.signup.bind(this);
+    this.state={
+        email : "",
+        password : "",
+        message: ""
         }
     }
     login(e){

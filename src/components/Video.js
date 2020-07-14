@@ -1,10 +1,11 @@
 import React from 'react'
 import Webcam from "react-webcam";
 import ReactDOM from 'react-dom'
-// eslint-disable-next-line
 import {storage} from './fire'
+import fire from './fire'
 
 const WebcamCapture = () => {
+
   const webcamRef = React.useRef(null);
   const [url, setUrl] = React.useState("");
 
@@ -13,10 +14,6 @@ const WebcamCapture = () => {
     if (imageSrc !== null){
       const uploadTask = storage.ref(`images/profile`);
       uploadTask.putString(imageSrc.split("").slice(23).join(""),"base64");
-      uploadTask.getDownloadURL().then((dlUrl)=>{
-        setUrl(dlUrl)
-        //grap a refcence to the user and attach to him
-      })
     }
   };
 
@@ -52,9 +49,3 @@ const WebcamCapture = () => {
   ReactDOM.render(<WebcamCapture />, document.getElementById("root"));
 
   export default WebcamCapture
-  
-  // https://www.npmjs.com/package/react-webcam
-  
-  
- 
-  
