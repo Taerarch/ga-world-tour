@@ -48,7 +48,7 @@ class Home extends Component {
     return (
       <div>
         <div id="sideBar">
-          <h1>You are logged in {this.props.user.email}</h1>
+          <h1 id="logTitle">You are logged in {this.props.user.email}</h1>
           <button onClick={this.logout}>Logout</button>
           <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
           <button onClick={this.mapClick}>Map Tours</button>
@@ -81,9 +81,7 @@ class Search extends Component {
   }
 
   _handleChangeTime(event) {
-    console.log(event.target.value);
     this.setState({ year: event.target.value }, () => this._handleSubmit())
-
   }
 
   _handleSubmit(event) {

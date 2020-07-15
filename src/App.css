@@ -3,7 +3,7 @@
 } */
 
 path {
-  transition: 0s;
+  transition: 0.1s;
 }
 
 svg {
@@ -13,6 +13,8 @@ svg {
 
 .svg-map {
   margin-left: 2em;
+  margin-top: 2em;
+
 }
 
 svg .country:hover {
@@ -48,7 +50,7 @@ video {
   margin-top: 3em;
 } */
 
-nav{
+nav {
   text-decoration: none;
   display: flex;
   justify-content: space-around;
@@ -67,6 +69,10 @@ nav :hover{
   justify-content: space-between;
   align-items: center;
   list-style: none;
+  margin-bottom: 0px;
+  padding: 1em;
+  padding-left: 10em;
+
 }
 
 .home_nav{
@@ -74,13 +80,12 @@ nav :hover{
 }
 
 #sideBar {
-  width: 200px;
+  width: 250px;
   display: inline-block;
   vertical-align: top;
   background-color: darkgray;
-  min-height: 97vh;
-  padding-left: 1em;
-  padding-right: 1em;
+  min-height: 100vh;
+  padding: 1em;
   text-align: center;
 }
 
@@ -91,8 +96,8 @@ nav :hover{
 #image{
   border-radius: 50%;
   object-fit: cover;
-  width:300px;
-  height:300px;
+  width: 300px;
+  height: 300px;
   box-shadow: 0px 10px 20px grey;
   border-style: double;
 }
@@ -102,6 +107,25 @@ nav :hover{
 }
 
 #mapDiv {
-  width: 75%;
+  margin-bottom: 1em;
+  min-width: 1400px;
   display: inline-block;
+  position: absolute;
+}
+
+#logTitle {
+  font-size: 30px;
+}
+
+
+@media screen and (max-width: 800px) {
+
+    #sideBar {
+      width: 100%;
+      min-height: 250px;
+    }
+    #mapDiv {
+        width: 90%;
+        position: relative;
+    }
 }

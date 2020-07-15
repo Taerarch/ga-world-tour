@@ -16,10 +16,13 @@
     "react-avatar": "^3.9.7",
     "react-bootstrap": "^1.2.2",
     "react-dom": "^16.13.1",
+    "react-native": "^0.63.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
+    "react-styled-components": "^0.1.11",
     "react-svg-map": "^2.1.2",
     "react-webcam": "^5.2.0",
+    "styled-components": "^5.1.1",
     "underscore": "^1.10.2"
   },
   "scripts": {
