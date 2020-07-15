@@ -5,6 +5,7 @@ import Nav from './Nav';
 import Video from './Video';
 import fire from './fire'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
+import Profile from './Profile';
 
 
 class App extends Component {
@@ -41,7 +42,8 @@ class App extends Component {
               {this.state.user 
                 ? (<Route path="/" exact component={()=><Home user={this.state.user}/>} />) 
                 : (<Route path="/" exact component={User} />)}
-              <Route path="/profile" exact component ={()=><Video user={this.state.user}/>} />
+              <Route path="/profile" exact component ={()=><Profile user={this.state.user}/>} />
+              <Route path="/video" exact component ={()=><Video user={this.state.user}/>} />
 
             </Switch>
           </div>
