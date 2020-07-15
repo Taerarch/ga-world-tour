@@ -37,12 +37,12 @@ function Nav(props) {
                 ? (<Link  style={navStyle} to="/profile">
 
                         <Avatar src={dlUrl} round={true}  />
-                    </Link>
-                    )
+                    </Link>)
                 : null}
 
 
             </ul>
+            
         </nav>
     )
 }
