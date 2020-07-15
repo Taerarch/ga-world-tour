@@ -50,20 +50,28 @@ video {
 }
 
 nav{
+  text-decoration: none;
   display: flex;
   justify-content: space-around;
-  align-items: center;
   min-height: 10vh;
   background: rgb(75,75,75);
-  color: white;
+}
+
+nav :hover{
+  color: coral;
+  text-decoration: none;
 }
 
 .nav-links{
-  width: 40%;
+  width: 80%;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   align-items: center;
   list-style: none;
+}
+
+.home_nav{
+  text-decoration: none;
 }
 
 #webcam{
