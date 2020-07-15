@@ -42,8 +42,9 @@ class Home extends Component {
         <button onClick={this.logout}>Logout</button>
         <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
         <button onClick={this.mapClick}>Map Tours</button>
+        <div id="tourList">
+        </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />
-
       </div>
     )
   }
