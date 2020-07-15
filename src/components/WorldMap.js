@@ -93,7 +93,7 @@ class WorldMap extends Component {
     const colourCountries = (index = 0) => {
       if (index !== filterCountryArray.length) {
         this._handleColorCountry(filterCountryArray[index])
-        setTimeout(() => colourCountries(index + 1), 10)
+        setTimeout(() => colourCountries(index + 1), 100)
       }
     }
     colourCountries();
@@ -107,7 +107,7 @@ class WorldMap extends Component {
 
   render() {
     return (
-      <div>
+      <div id="mapDiv">
         <CheckboxSVGMap map={World}
             onLocationFocus={this._handleLocationFocus}
 						onLocationBlur={this._handleLocationBlur}

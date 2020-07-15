@@ -47,14 +47,16 @@ class Home extends Component {
   render() {
     return (
       <div>
-        <h1>You are logged in {this.props.user.email}</h1>
-        <button onClick={this.logout}>Logout</button>
-        <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
-        <button onClick={this.mapClick}>Map Tours</button>
-        <div id="tourList">
-          {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map(t_filtered => (
-            <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)}</p>
-          ))}
+        <div id="sideBar">
+          <h1>You are logged in {this.props.user.email}</h1>
+          <button onClick={this.logout}>Logout</button>
+          <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
+          <button onClick={this.mapClick}>Map Tours</button>
+          <div id="tourList">
+            {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map(t_filtered => (
+              <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)}</p>
+            ))}
+          </div>
         </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />
       </div>
@@ -95,11 +97,9 @@ class Search extends Component {
       <div>
         <form>
           <label for="band">Band: </label>
-          <input type="text" id="band" name="band" onChange={this._handleChangeBand} value={this.state.content} required></input>
-
+          <input type="text" id="band" name="band" onChange={this._handleChangeBand} value={this.state.content} required></input><br></br>
           <label for="year">Year: </label>
           <input type="integer" id="year" name="year" onChange={this._handleChangeTime} value={this.state.content} required></input>
-
         </form>
       </div>
     )
