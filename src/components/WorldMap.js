@@ -8,7 +8,7 @@ import WorldInfo from '../MapUtilities/MapInfo.js'
 import '../App.css'
 import _ from 'underscore'
 
-
+const emptyCountries = []
 
 class WorldMap extends Component {
   constructor(props) {
@@ -16,7 +16,7 @@ class WorldMap extends Component {
     this.state = {
       allCountries: WorldInfo.worldInfo.locations,
       country: '',
-      selectedLocations: [],
+      selectedLocations: emptyCountries,
       focusedLocation: '',
     }
     this._handleCountry = this._handleCountry.bind(this);
@@ -26,6 +26,14 @@ class WorldMap extends Component {
     this._handleOnChange = this._handleOnChange.bind(this);
     this._handleColorCountry = this._handleColorCountry.bind(this);
     this._mapTourCountry = this._mapTourCountry.bind(this);
+<<<<<<< HEAD
+    // this.emptyMap = this.emptyMap.bind(this);
+
+  }
+
+  reset() {
+    this.setState({selectedLocations: emptyCountries})
+=======
   }
 
   componentDidMount() {
@@ -33,6 +41,7 @@ class WorldMap extends Component {
   }
   componentWillUnmount() {
     this.props.onRef(undefined)
+>>>>>>> 0cdab8f02854e5ed269138ef543be78fe44d3135
   }
 
   _handleCountry(event) {
@@ -67,18 +76,34 @@ class WorldMap extends Component {
 	}
 
   _handleColorCountry(tourCountry) {
-    const allCountries = this.state.allCountries.find(country => country.name === tourCountry)
+    let allCountries = this.state.allCountries.find(country => country.name === tourCountry)
+    // console.log(allCountries);
+    this.setState({selectedLocations: [...this.state.selectedLocations, allCountries]});
+
     if (allCountries) {
       const country = document.getElementById(allCountries.id); //get the toured countries,
       country.style.fill = 'orange';
     }
   }
+
   formatYear(string) {
     var options = { year: 'numeric' };
     return new Date(string).toLocaleDateString([], options);
   }
 
   _mapTourCountry() {
+    const emptyMap = () => {
+      const prevSearch = this.state.selectedLocations
+      const prevSearchFilter = prevSearch.filter( country => Boolean)
+      console.log(prevSearchFilter);
+      if (prevSearchFilter.length > 0) {
+        // For every previous selected country will get it back to its original colour.
+        prevSearchFilter.map( (country) => document.getElementById(country.id).style.fill = '#a1d99b' )
+      }
+    }
+
+    emptyMap();
+
     const findYear = this.props.tourCountries.filter((tour) => this.formatYear(tour.datetime) === this.props.year)
     const countryArray = findYear.map((tour) => tour.venue.country)
     const filterCountryArray = _.uniq(countryArray)
@@ -86,7 +111,7 @@ class WorldMap extends Component {
     const colourCountries = (index = 0) => {
       if (index !== filterCountryArray.length) {
         this._handleColorCountry(filterCountryArray[index])
-        setTimeout(() => colourCountries(index + 1), 3000)
+        setTimeout(() => colourCountries(index + 1), 1000)
       }
     }
     colourCountries();
@@ -94,6 +119,8 @@ class WorldMap extends Component {
 
 
   // <button onClick={this._mapTourCountry}>Color Map</button>
+
+
 
 
   render() {
