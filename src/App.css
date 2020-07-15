@@ -1,6 +1,6 @@
-* {
-
-}
+/* label {
+  width: 40px;
+} */
 
 path {
   transition: 0s;
@@ -12,7 +12,7 @@ svg {
 }
 
 .svg-map {
-  margin: 2em;
+  margin-left: 2em;
 }
 
 svg .country:hover {
@@ -44,9 +44,9 @@ video {
   width: 100%;
 }
 
-.App {
+/* .App {
   margin-top: 3em;
-}
+} */
 
 nav{
   text-decoration: none;
@@ -74,11 +74,11 @@ nav :hover{
 }
 
 #sideBar {
-  width: 18%;
+  width: 200px;
   display: inline-block;
   vertical-align: top;
   background-color: darkgray;
-  min-height: 110vh;
+  min-height: 97vh;
   padding-left: 1em;
   padding-right: 1em;
   text-align: center;
@@ -102,6 +102,6 @@ nav :hover{
 }
 
 #mapDiv {
-  width: 80%;
+  width: 75%;
   display: inline-block;
 }
