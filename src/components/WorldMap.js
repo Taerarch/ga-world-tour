@@ -60,22 +60,27 @@ class WorldMap extends Component {
 	}
 
   _handleColorCountry(tourCountry) {
-    const allCountries = this.state.allCountries.filter(country => country.name === tourCountry)
-    const country = document.getElementById(allCountries[0].id); //get the toured countries,
-    country.style.fill = 'orange';
+    console.log(tourCountry);
+    const allCountries = this.state.allCountries.find(country => country.name === tourCountry)
+    console.log(allCountries);
+    if (allCountries) {
+      const country = document.getElementById(allCountries.id); //get the toured countries,
+      country.style.fill = 'orange';
+    }
   }
 
 
   _mapTourCountry() {
-    const countryArray = this.props.tourCountries.map((country) => {return country.venue.country})
+    const countryArray = this.props.tourCountries.map((country) => country.venue.country)
     const filterCountryArray = _.uniq(countryArray)
+
     const colourCountries = (index = 0) => {
       if (index !== filterCountryArray.length - 1) {
         this._handleColorCountry(filterCountryArray[index])
         setTimeout(() => colourCountries(index + 1), 3000)
       }
     }
-    colourCountries()
+    colourCountries();
   }
 
 
@@ -84,9 +89,7 @@ class WorldMap extends Component {
   render() {
     return (
       <div>
-        <select onChange={this._mapTourCountry}>
-          {this.state.allCountries.map((country) => <option key={country.id} value={country.id}>{country.name}</option>)}
-        </select>
+        <button onClick={this._mapTourCountry}>Color Map</button>
         <CheckboxSVGMap map={World}
             onLocationFocus={this._handleLocationFocus}
 						onLocationBlur={this._handleLocationBlur}

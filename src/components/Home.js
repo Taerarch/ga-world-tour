@@ -11,55 +11,32 @@ class Home extends Component {
       super(props)
       this.state={
         tours: [],
-        filteredTime: [],
-        band: ""
+        band: "",
+        url: ``
       }
       this.saveSearch = this.saveSearch.bind(this);
+  }
 
-      function formatDate(string) {
-        var options = { year: 'numeric' };
-        return new Date(string).toLocaleDateString([], options);
-      }
-      const fetchTours = () => {
-        axios.get(WEEZER_URL).then((results) => {
-          this.setState({ tours: results.data })
-        })
-      }
-      fetchTours();
-      this.saveTours = this.saveTours.bind(this)
-  }
-  saveTours(content) {
-    axios.post(WEEZER_URL)
-  }
 
   logout(){
-      fire.auth().signOut();
+    fire.auth().signOut();
   }
-  saveSearch(band, year) {
-    this.setState({band: band, year: year})
-  }
-  render() {
-    function formatToYear(string) {
-      var options = { year: 'numeric' };
-      return new Date(string).toLocaleDateString([], options);
-    }
-    function formatDate(string) {
-      var options = { year: 'numeric', month: 'long', day: 'numeric' };
-      return new Date(string).toLocaleDateString([], options);
-    }
-    // Input the countries into WorldMap
-    // Function to use the select country function and refresh the map
-    // Problems: Selected multiple times might cause a problem
 
+  saveSearch(band, year, url) {
+    this.setState({band: band, year: year, url: url}, () => {
+      axios.get(this.state.url).then((results) => {
+        this.setState({ tours: results.data })
+      })
+    })
+  }
+
+  render() {
     return (
       <div>
-        <div className="nav">
-          <h1>You are logged in {this.props.user.email}</h1>
-          <Search onSubmit={this.saveSearch} tours={this.state.tours}/>
-
-          <button onClick={this.logout}>Logout</button>
-        </div>
-        <Map tourCountries={this.state.tours.filter(t => formatToYear(t.datetime) === `${this.state.year}`)} />
+        <h1>You are logged in {this.props.user.email}</h1>
+        <Search onSubmit={this.saveSearch}/>
+        <button onClick={this.logout}>Logout</button>
+        <Map tourCountries={this.state.tours} />
       </div>
     )
   }
@@ -75,15 +52,19 @@ class Search extends Component {
   }
 
   _handleChangeBand(event) {
-    this.setState({band: event.target.value});
+    this.setState({
+      band: event.target.value,
+      url: `https://rest.bandsintown.com/artists/${event.target.value}/events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=upcoming`
+    });
   }
 
   _handleChangeTime(event) {
     this.setState({year: event.target.value})
   }
+
   _handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.band, this.state.year);
+    this.props.onSubmit(this.state.band, this.state.year, this.state.url);
   }
 
   render() {
