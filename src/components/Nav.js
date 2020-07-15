@@ -6,14 +6,20 @@ import {storage} from './fire'
 
 function Nav(props) {
     const navStyle={
-        color: 'white'
+        color: 'white',
+        textDecoration: 'none',
+        fontWeight: "bold"
     }
     const [dlUrl, setUrl] = React.useState("");
+    
 
     let uploadTask = null;
+    let answer_array = null;
     if (props.user !== null){
         uploadTask = storage.ref(`images/${props.user.uid}`);
+        answer_array = props.user.email;
     }
+    
     if (uploadTask !== null){
         uploadTask.getDownloadURL().then((dlUrl)=>{
           setUrl(dlUrl)
@@ -28,9 +34,12 @@ function Nav(props) {
                     <li className="home_nav" >GA World Tour</li>
                 </Link>
 
+             
+
                 {props.user 
                 ? (<Link  style={navStyle} to="/profile">
-                        <Avatar src={dlUrl} size={100} round={true}  />
+                        
+                        <Avatar src={dlUrl} round={true}  />
                     </Link>) 
                 : null}
                 
