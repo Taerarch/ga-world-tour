@@ -6,6 +6,7 @@ import Video from './Video';
 import fire from './fire'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom';
 import Profile from './Profile';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 class App extends Component {

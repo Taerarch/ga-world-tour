@@ -53,7 +53,7 @@ nav{
   display: flex;
   justify-content: space-around;
   min-height: 10vh;
-  background: rgb(75,75,75);
+  background: rgb(65,65,65);
 }
 
 nav :hover{

@@ -14,10 +14,8 @@ function Nav(props) {
 
 
     let uploadTask = null;
-    let answer_array = null;
     if (props.user !== null){
         uploadTask = storage.ref(`images/${props.user.uid}`);
-        answer_array = props.user.email;
     }
 
     if (uploadTask !== null){
