@@ -26,14 +26,6 @@ class WorldMap extends Component {
     this._handleOnChange = this._handleOnChange.bind(this);
     this._handleColorCountry = this._handleColorCountry.bind(this);
     this._mapTourCountry = this._mapTourCountry.bind(this);
-<<<<<<< HEAD
-    // this.emptyMap = this.emptyMap.bind(this);
-
-  }
-
-  reset() {
-    this.setState({selectedLocations: emptyCountries})
-=======
   }
 
   componentDidMount() {
@@ -41,7 +33,6 @@ class WorldMap extends Component {
   }
   componentWillUnmount() {
     this.props.onRef(undefined)
->>>>>>> 0cdab8f02854e5ed269138ef543be78fe44d3135
   }
 
   _handleCountry(event) {
@@ -77,8 +68,6 @@ class WorldMap extends Component {
 
   _handleColorCountry(tourCountry) {
     let allCountries = this.state.allCountries.find(country => country.name === tourCountry)
-    // console.log(allCountries);
-    this.setState({selectedLocations: [...this.state.selectedLocations, allCountries]});
 
     if (allCountries) {
       const country = document.getElementById(allCountries.id); //get the toured countries,
@@ -93,16 +82,12 @@ class WorldMap extends Component {
 
   _mapTourCountry() {
     const emptyMap = () => {
-      const prevSearch = this.state.selectedLocations
-      const prevSearchFilter = prevSearch.filter( country => Boolean)
-      console.log(prevSearchFilter);
-      if (prevSearchFilter.length > 0) {
-        // For every previous selected country will get it back to its original colour.
-        prevSearchFilter.map( (country) => document.getElementById(country.id).style.fill = '#a1d99b' )
-      }
+      const greenWorld = this.state.allCountries
+      // The map function will iterate every country in the world and will paint it green.
+      greenWorld.map( (country) => document.getElementById(country.id).style.fill = '#a1d99b' )
     }
 
-    emptyMap();
+    emptyMap(); // painting the world green before a new search.
 
     const findYear = this.props.tourCountries.filter((tour) => this.formatYear(tour.datetime) === this.props.year)
     const countryArray = findYear.map((tour) => tour.venue.country)
