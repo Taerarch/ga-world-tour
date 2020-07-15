@@ -26,7 +26,6 @@ function Nav(props) {
           //grap a refcence to the user and attach to him
         })
       }
-    // console.log("URL is : "+dlUrl)
     return (
         <nav>
             <ul className="nav-links">
