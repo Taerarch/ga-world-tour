@@ -26,12 +26,22 @@ class WorldMap extends Component {
     this._handleOnChange = this._handleOnChange.bind(this);
     this._handleColorCountry = this._handleColorCountry.bind(this);
     this._mapTourCountry = this._mapTourCountry.bind(this);
+<<<<<<< HEAD
     // this.emptyMap = this.emptyMap.bind(this);
 
   }
 
   reset() {
     this.setState({selectedLocations: emptyCountries})
+=======
+  }
+
+  componentDidMount() {
+    this.props.onRef(this)
+  }
+  componentWillUnmount() {
+    this.props.onRef(undefined)
+>>>>>>> 0cdab8f02854e5ed269138ef543be78fe44d3135
   }
 
   _handleCountry(event) {
@@ -51,6 +61,9 @@ class WorldMap extends Component {
   //   const focusedLocation = getLocationName(event);
   //   this.setState({ focusedLocation : focusedLocation});
   // }
+  method() {
+    window.alert('do stuff')
+  }
 
   _handleOnChange(selectedNodes) {
     console.log(selectedNodes);
@@ -105,6 +118,7 @@ class WorldMap extends Component {
   }
 
 
+  // <button onClick={this._mapTourCountry}>Color Map</button>
 
 
 
@@ -112,7 +126,6 @@ class WorldMap extends Component {
   render() {
     return (
       <div>
-        <button onClick={this._mapTourCountry}>Color Map</button>
         <CheckboxSVGMap map={World}
             onLocationFocus={this._handleLocationFocus}
 						onLocationBlur={this._handleLocationBlur}

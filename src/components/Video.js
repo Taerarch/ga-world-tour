@@ -7,14 +7,6 @@ const WebcamCapture = (props) => {
 
   const webcamRef = React.useRef(null);
   const [url, setUrl] = React.useState("");
-  
-  
-// app
-//   .database()
-//   .ref(`whatever/path/in/db`)
-//   .on('some action that you can get from documentation', (response) => {
-//     this.setState({whatever: response.something})
-//   })
 
   const capture = () => {
     const imageSrc = webcamRef.current.getScreenshot();
