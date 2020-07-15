@@ -32,7 +32,16 @@ class Home extends Component {
         this.setState({ tours: results.data })
       })
     })
+  }
 
+  formatYear(string) {
+    var options = { year: 'numeric' };
+    return new Date(string).toLocaleDateString([], options);
+  }
+
+  formatDate(string) {
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(string).toLocaleDateString([], options);
   }
 
   render() {
@@ -43,6 +52,9 @@ class Home extends Component {
         <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
         <button onClick={this.mapClick}>Map Tours</button>
         <div id="tourList">
+          {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map(t_filtered => (
+            <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)}</p>
+          ))}
         </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />
       </div>

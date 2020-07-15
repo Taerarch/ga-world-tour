@@ -26,14 +26,12 @@ class WorldMap extends Component {
     this._handleOnChange = this._handleOnChange.bind(this);
     this._handleColorCountry = this._handleColorCountry.bind(this);
     this._mapTourCountry = this._mapTourCountry.bind(this);
-<<<<<<< HEAD
     // this.emptyMap = this.emptyMap.bind(this);
 
   }
 
   reset() {
     this.setState({selectedLocations: emptyCountries})
-=======
   }
 
   componentDidMount() {
@@ -41,7 +39,6 @@ class WorldMap extends Component {
   }
   componentWillUnmount() {
     this.props.onRef(undefined)
->>>>>>> 0cdab8f02854e5ed269138ef543be78fe44d3135
   }
 
   _handleCountry(event) {
@@ -61,9 +58,6 @@ class WorldMap extends Component {
   //   const focusedLocation = getLocationName(event);
   //   this.setState({ focusedLocation : focusedLocation});
   // }
-  method() {
-    window.alert('do stuff')
-  }
 
   _handleOnChange(selectedNodes) {
     console.log(selectedNodes);
@@ -98,7 +92,7 @@ class WorldMap extends Component {
       console.log(prevSearchFilter);
       if (prevSearchFilter.length > 0) {
         // For every previous selected country will get it back to its original colour.
-        prevSearchFilter.map( (country) => document.getElementById(country.id).style.fill = '#a1d99b' )
+        prevSearchFilter.map( (country) => document.getElementById(country.id).style.fill = '#a1d99b')
       }
     }
 
@@ -111,7 +105,7 @@ class WorldMap extends Component {
     const colourCountries = (index = 0) => {
       if (index !== filterCountryArray.length) {
         this._handleColorCountry(filterCountryArray[index])
-        setTimeout(() => colourCountries(index + 1), 1000)
+        setTimeout(() => colourCountries(index + 1), 10)
       }
     }
     colourCountries();
