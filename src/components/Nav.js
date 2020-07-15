@@ -13,17 +13,17 @@ function Nav(props) {
     const [dlUrl, setUrl] = React.useState("");
 
 
-    let uploadTask = null;
+    let downloadTask = null;
     if (props.user !== null){
-        uploadTask = storage.ref(`images/${props.user.uid}`);
+        downloadTask = storage.ref(`images/${props.user.uid}`);
     }
 
-    if (uploadTask !== null){
-        uploadTask.getDownloadURL().then((dlUrl)=>{
+    if (downloadTask !== null){
+        downloadTask.getDownloadURL().then((dlUrl)=>{
           setUrl(dlUrl)
           //grap a refcence to the user and attach to him
         })
-      }
+    }
     return (
         <nav>
             <ul className="nav-links">
@@ -37,7 +37,8 @@ function Nav(props) {
                 ? (<Link  style={navStyle} to="/profile">
 
                         <Avatar src={dlUrl} round={true}  />
-                    </Link>)
+                    </Link>
+                    )
                 : null}
 
 
