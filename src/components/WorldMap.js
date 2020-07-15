@@ -60,22 +60,24 @@ class WorldMap extends Component {
 	}
 
   _handleColorCountry(tourCountry) {
-    console.log(tourCountry);
     const allCountries = this.state.allCountries.find(country => country.name === tourCountry)
-    console.log(allCountries);
     if (allCountries) {
       const country = document.getElementById(allCountries.id); //get the toured countries,
       country.style.fill = 'orange';
     }
   }
-
+  formatYear(string) {
+    var options = { year: 'numeric' };
+    return new Date(string).toLocaleDateString([], options);
+  }
 
   _mapTourCountry() {
-    const countryArray = this.props.tourCountries.map((country) => country.venue.country)
+    const findYear = this.props.tourCountries.filter((tour) => this.formatYear(tour.datetime) === this.props.year)
+    const countryArray = findYear.map((tour) => tour.venue.country)
     const filterCountryArray = _.uniq(countryArray)
 
     const colourCountries = (index = 0) => {
-      if (index !== filterCountryArray.length - 1) {
+      if (index !== filterCountryArray.length) {
         this._handleColorCountry(filterCountryArray[index])
         setTimeout(() => colourCountries(index + 1), 3000)
       }

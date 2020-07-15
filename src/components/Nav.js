@@ -11,7 +11,7 @@ function Nav(props) {
         fontWeight: "bold"
     }
     const [dlUrl, setUrl] = React.useState("");
-    
+
 
     let uploadTask = null;
     let answer_array = null;
@@ -19,14 +19,14 @@ function Nav(props) {
         uploadTask = storage.ref(`images/${props.user.uid}`);
         answer_array = props.user.email;
     }
-    
+
     if (uploadTask !== null){
         uploadTask.getDownloadURL().then((dlUrl)=>{
           setUrl(dlUrl)
           //grap a refcence to the user and attach to him
         })
       }
-    console.log("URL is : "+dlUrl)
+    // console.log("URL is : "+dlUrl)
     return (
         <nav>
             <ul className="nav-links">
@@ -34,16 +34,16 @@ function Nav(props) {
                     <li className="home_nav" >GA World Tour</li>
                 </Link>
 
-             
 
-                {props.user 
+
+                {props.user
                 ? (<Link  style={navStyle} to="/profile">
-                        
+
                         <Avatar src={dlUrl} round={true}  />
-                    </Link>) 
+                    </Link>)
                 : null}
-                
-                
+
+
             </ul>
         </nav>
     )

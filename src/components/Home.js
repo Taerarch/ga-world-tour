@@ -12,7 +12,8 @@ class Home extends Component {
       this.state={
         tours: [],
         band: "",
-        url: ``
+        url: ``,
+        year: ""
       }
       this.saveSearch = this.saveSearch.bind(this);
   }
@@ -34,9 +35,9 @@ class Home extends Component {
     return (
       <div>
         <h1>You are logged in {this.props.user.email}</h1>
-        <Search onSubmit={this.saveSearch}/>
+        <Search onSubmit={this.saveSearch} year={this.state.year}/>
         <button onClick={this.logout}>Logout</button>
-        <Map tourCountries={this.state.tours} />
+        <Map tourCountries={this.state.tours} year={this.state.year} />
       </div>
     )
   }
@@ -45,7 +46,7 @@ class Home extends Component {
 class Search extends Component {
   constructor() {
     super();
-    this.state = { year: "" }
+    this.state = {}
     this._handleChangeBand = this._handleChangeBand.bind(this);
     this._handleChangeTime = this._handleChangeTime.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
@@ -54,18 +55,21 @@ class Search extends Component {
   _handleChangeBand(event) {
     this.setState({
       band: event.target.value,
-      url: `https://rest.bandsintown.com/artists/${event.target.value}/events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=upcoming`
+      url: `https://rest.bandsintown.com/artists/${event.target.value}/events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=`
     });
   }
 
   _handleChangeTime(event) {
-    this.setState({year: event.target.value})
+    console.log(event.target.value);
+    this.setState({ year: event.target.value })
   }
 
   _handleSubmit(event) {
     event.preventDefault();
-    this.props.onSubmit(this.state.band, this.state.year, this.state.url);
+    this.props.onSubmit(this.state.band, this.state.year, this.state.url + this.state.year);
   }
+
+
 
   render() {
     return (
