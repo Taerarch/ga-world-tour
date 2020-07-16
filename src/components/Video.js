@@ -32,7 +32,7 @@ const WebcamCapture = (props) => {
   }
 
   return (
-    <>
+    <div className="camera">
       <Webcam
           id= "webcam"
           audio={false}
@@ -49,7 +49,7 @@ const WebcamCapture = (props) => {
         alt= "profile"
       />
       
-    </>
+    </div>
     );
   };
   

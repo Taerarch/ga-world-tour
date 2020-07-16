@@ -106,6 +106,9 @@ nav :hover{
 
 
 #webcam{
+  display: absolute;
+  left: 100px;
+  top: 150px;
   height: 400px;
   width: 400px;
 }
@@ -146,6 +149,11 @@ nav :hover{
         width: 100%;
         position: relative;
         border-top: none;
+    }
+    .camera{
+      display: inline-block;
+      
+      margin-top: 500px;
     }
 
 }
@@ -190,4 +198,9 @@ nav :hover{
   padding: 10px;
   border: 1px solid darkgray;
   background-color: white;
+}
+
+.camera{
+  display: inline-block;
+  margin-left: 500px ;
 }
