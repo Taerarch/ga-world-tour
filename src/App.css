@@ -36,6 +36,11 @@ svg .country:hover {
   padding: 1em;
   padding-top: 4em;
   text-align: center;
+  overflow-y: auto;
+  height: 100px;
+}
+#sideBar input{
+  width: 50%
 }
 
 #root {
@@ -120,6 +125,7 @@ nav :hover{
 
 #tourList {
   margin-left: 4px;
+  margin-top: 2em;
 }
 
 
@@ -131,6 +137,19 @@ nav :hover{
   #sideBar {
     width: 100%;
     min-height: 250px;
+    max-width: 1399px;
+    height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transform: rotate(-90deg);
+    transform-origin: right top;
+  }
+  #sideBar > div {
+    transform: rotate(90deg);
+    transform-origin: right top;
+  }
+  #sideBar input {
+    width: 128px;
   }
   #mapDiv {
     width: 100%
@@ -141,24 +160,9 @@ nav :hover{
       position: relative;
       border-top: none;
   }
-}
-
-@media screen and (max-width: 700px) {
-    #sideBar {
-      width: 100%;
-      min-height: 250px;
-    }
-    #mapDiv {
-      width: 100%
-    }
-    .svg-map {
-        border-top: 5px solid black;
-        width: 100%;
-        position: relative;
-        border-top: none;
-    }
 
 }
+
 
 .profile-page{
   display: flex;

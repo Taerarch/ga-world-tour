@@ -26,7 +26,7 @@ class Home extends Component {
       fire.database().ref(`${this.props.user.uid}/favourites`).on("value",res => {
         this.setState({favourites: res.val()})
       })
-    
+
   }
 
   mapClick = () => {
@@ -76,18 +76,20 @@ class Home extends Component {
     return (
       <div id="main">
         <div id="sideBar">
-          <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
-          <button onClick={this.mapClick}>Map Tours</button>
-          <div id="tourList">
-            {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map((t_filtered) => {
-              const isChecked = this.checkFavouriteList(t_filtered)
-              return <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)} <FormControlLabel
-              control={<Checkbox checked={isChecked} icon={<FavoriteBorder />}
-              onChange={() => this.handleCheckClick(t_filtered)} value={t_filtered}
-              checkedIcon={<Favorite />} name="checkedH" />}
-              />
-              </p>
-          })}
+          <div>
+            <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
+            <button onClick={this.mapClick}>Map Tours</button>
+            <div id="tourList">
+              {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map((t_filtered) => {
+                const isChecked = this.checkFavouriteList(t_filtered)
+                return <p>{t_filtered.venue.city}, {t_filtered.venue.country}<br></br> {this.formatDate(t_filtered.datetime)} <br></br> <FormControlLabel
+                control={<Checkbox checked={isChecked} icon={<FavoriteBorder />}
+                onChange={() => this.handleCheckClick(t_filtered)} value={t_filtered}
+                checkedIcon={<Favorite />} name="checkedH" />}
+                />
+                </p>
+            })}
+            </div>
           </div>
         </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />
