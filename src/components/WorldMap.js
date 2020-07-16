@@ -23,7 +23,6 @@ class WorldMap extends Component {
         dates: [],
       },
       focusedLocation: '',
-      dotArray: [],
       pointedLocation: null,
       tooltipStyle: {
         display: 'none',
@@ -162,13 +161,11 @@ class WorldMap extends Component {
     return (
       <div id="mapDiv">
         <SVGMap map={World}
-          onLocationFocus={this._handleLocationFocus}
-          onLocationBlur={this._handleLocationBlur}
           getLocationClassName={this.getLocationClassName}
-  				onChange={this._handleOnChange}
+          onChange={this._handleOnChange}
           onLocationMouseOver={this._handleMouseOver}
           onLocationMouseOut={this._handleLocationMouseOut}
-          onLocationMouseMove={this._handleLocationMouseMove}
+          onLocationMouseMove={this._hanldeLocationMouseMove}
         />
         <div className="examples__block__map__tooltip" style={this.state.tooltipStyle}>
           { _(events).map( (event) => (<p>{event}</p>))}

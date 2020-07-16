@@ -56,27 +56,26 @@ class Home extends Component {
   }
 
   handleCheckClick = (item) => {
-
     this.setState({checkBoxChecked: !this.state.checkBoxChecked})
     console.log(item.id)
     const fav = fire.database().ref().child(this.props.user.uid).child('favourites').child(item.id)
-
       fav.set(true)
-
   }
 
-  checkFavouriteList(item) {
-    if (fire.database().ref().child(this.props.user.uid).child('favourites')) {
-      !!this.state.favourites[item.id]
-    }
-  }
+  // checkFavouriteList(item) {
+  //   if (fire.database().ref().child(this.props.user.uid).child('favourites')) {
+  //     !!this.state.favourites[item.id]
+  //   }
+  // }
+  checkFavouriteList = (item) => !!this.state.favourites[item.id]
+
+
   render() {
     return (
       <div id="main">
         <div id="sideBar">
-        <button onClick={this.logout}>Logout</button>
-
           <h1 id="logTitle">You are logged in {this.props.user.email}</h1>
+          <button onClick={this.logout}>Logout</button>
           <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
           <button onClick={this.mapClick}>Map Tours</button>
           <div id="tourList">
