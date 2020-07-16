@@ -2,8 +2,7 @@ import React, { Component } from 'react'
 import Map from './WorldMap'
 import fire from './fire'
 import axios from 'axios'
-// const WEEZER_URL = 'https://rest.bandsintown.com/artists/weezer/events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=upcoming.json';
-// let BANDS_URL = `https://rest.bandsintown.com/artists//events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=upcoming`
+import Spotify from './Spotify'
 
 
 class Home extends Component {
@@ -59,6 +58,7 @@ class Home extends Component {
           </div>
         </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />
+        <Spotify />
       </div>
     )
   }
