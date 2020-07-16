@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from 'styled-components'
+import ReactDOM from 'react-dom';
 import World from '@svg-maps/world';
 import { SVGMap } from 'react-svg-map';
 import 'react-svg-map/lib/index.css'
@@ -8,16 +8,6 @@ import 'react-svg-map/src/svg-map.scss'
 import WorldInfo from '../MapUtilities/MapInfo.js'
 import '../App.css'
 import _ from 'underscore'
-
-const StyledDot = styled.h1`
-  left: ${props => props.long + 'px'};
-  top: ${props => props.lat + 'px'};
-  position: absolute;
-  color: red;
-  font-size: 60px;
-  margin: 0px;
-  line-height: 1px;
-`
 
 
 
@@ -33,20 +23,19 @@ class WorldMap extends Component {
         dates: [],
       },
       focusedLocation: '',
-      long: 400,
-      lat: 400,
       pointedLocation: null,
       tooltipStyle: {
         display: 'none',
       }
     };
+
     this._handleCountry = this._handleCountry.bind(this);
     this._handleMouseOver = this._handleMouseOver.bind(this);
     this._handleLocationMouseOut = this._handleLocationMouseOut.bind(this);
     this._handleOnChange = this._handleOnChange.bind(this);
     this._handleColorCountry = this._handleColorCountry.bind(this);
     this._mapTourCountry = this._mapTourCountry.bind(this);
-    this._hanldeLocationMouseMove = this._handleLocationMouseMove.bind(this);
+    this._handleLocationMouseMove = this._handleLocationMouseMove.bind(this);
     this.getLocationClassName = this.getLocationClassName.bind(this);
   }
 
@@ -64,9 +53,7 @@ class WorldMap extends Component {
   _handleLocationMouseOut(event) {
     this.setState({
       pointedLocation: null,
-      tooltipStyle: {
-        display: 'none'
-      }
+      tooltipStyle: { display: 'none'}
     });
   }
 
@@ -85,9 +72,7 @@ class WorldMap extends Component {
     return ('svg-map__location');
   }
 
-
   _handleOnChange(selectedNodes) {
-    // console.log(selectedNodes);
 		this.setState(prevState => {
 			return {
 				...prevState,
@@ -98,7 +83,6 @@ class WorldMap extends Component {
 
   _handleColorCountry(tourCountry) {
     let allCountries = this.state.allCountries.find(country => country.name === tourCountry)
-
     if (allCountries) {
       const country = document.getElementById(allCountries.id); //get the toured countries,
       country.style.fill = 'orange';
@@ -138,24 +122,14 @@ class WorldMap extends Component {
     const emptyMap = () => {
       const greenWorld = this.state.allCountries
       // The map function will iterate every country in the world and will paint it green.
-      greenWorld.map( (country) => document.getElementById(country.id).style.fill = '#a1d99b' )
+      greenWorld.map( (country) => document.getElementById(country.id).style.fill = '#ccc' )
     }
 
     emptyMap(); // painting the world green before a new search.
 
     const findYear = this.props.tourCountries.filter((tour) => this.formatYear(tour.datetime) === this.props.year)
     const countryArray = findYear.map((tour) => tour.venue.country)
-    const latArray = findYear.map((tour) => tour.venue.latitude)
-    const longArray = findYear.map((tour) => tour.venue.longitude)
     const filterCountryArray = _.uniq(countryArray)
-
-    const plotDots = (index = 0) => {
-      if (index !== countryArray.length) {
-        this._handlePlotDots(latArray[index], longArray[index])
-        setTimeout(() => plotDots(index + 1), 1000)
-      }
-    }
-    plotDots();
 
     const colourCountries = (index = 0) => {
       if (index !== filterCountryArray.length) {
@@ -165,16 +139,7 @@ class WorldMap extends Component {
     }
     colourCountries();
   }
-  _handlePlotDots(la, lon) {
-
-    return (<StyledDot long={parseFloat(lon)+300} lat={parseFloat(la)+300}>.</StyledDot>)
-  }
-  // {dots.map((dot, index) => <StyledDot long={dot[0]} lat={dot[1]}>.</StyledDot>
-  // )}
-
-
   render() {
-    const makeDots = this._handlePlotDots();
     let cities;
     let venues;
     let dates;
@@ -193,25 +158,18 @@ class WorldMap extends Component {
         dates: this.state.events.date
       };
     }
-
     return (
       <div id="mapDiv">
-        {makeDots}
-        <StyledDot long={this.state.long}>.</StyledDot>
         <SVGMap map={World}
-            getLocationClassName={this.getLocationClassName}
-						onChange={this._handleOnChange}
-            onLocationMouseOver={this._handleMouseOver}
-            onLocationMouseOut={this._handleLocationMouseOut}
-            onLocationMouseMove={this._hanldeLocationMouseMove}
-           />
-           <div
-             className="examples__block__map__tooltip"
-             style={this.state.tooltipStyle}
-             >
-              { _(events).map( (event) => (<p>{event}</p>))}
-            </div>
-
+          getLocationClassName={this.getLocationClassName}
+          onChange={this._handleOnChange}
+          onLocationMouseOver={this._handleMouseOver}
+          onLocationMouseOut={this._handleLocationMouseOut}
+          onLocationMouseMove={this._hanldeLocationMouseMove}
+        />
+        <div className="examples__block__map__tooltip" style={this.state.tooltipStyle}>
+          { _(events).map( (event) => (<p>{event}</p>))}
+          </div>
       </div>
     );
   }

@@ -77,7 +77,7 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div id="main">
         <div id="sideBar">
           <h1 id="logTitle">You are logged in {this.props.user.email}</h1>
           <button onClick={this.logout}>Logout</button>
@@ -87,11 +87,11 @@ class Home extends Component {
             {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map((t_filtered) => {
               const isChecked = this.checkFavouriteList(t_filtered)
               return <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)} <FormControlLabel
-              control={<Checkbox checked={isChecked} icon={<FavoriteBorder />} 
+              control={<Checkbox checked={isChecked} icon={<FavoriteBorder />}
               onChange={() => this.handleCheckClick(t_filtered)} value={t_filtered}
               checkedIcon={<Favorite />} name="checkedH" />}
               />
-              </p>         
+              </p>
           })}
           </div>
         </div>

@@ -1,6 +1,5 @@
-/* label {
-  width: 40px;
-} */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
 
 path {
   transition: 0.1s;
@@ -10,17 +9,33 @@ svg {
   width: 100%;
   height: 300px;
 }
-
 .svg-map {
-  margin-left: 2em;
-  margin-top: 2em;
-
+  padding: 2em;
+  width: 150vh;
+  background-color: lightblue;
+}
+#mapDiv {
+  width: 80%;
+  display: inline-block;
+}
+.svg-map__location {
 }
 
 svg .country:hover {
   stroke: black;
   stroke-width: 1px;
   cursor: pointer;
+}
+
+#sideBar {
+  width: 25vh;
+  display: inline-block;
+  vertical-align: top;
+  background-color: white;
+  min-height: 100vh;
+  padding: 1em;
+  text-align: center;
+  border-right: 5px solid black;
 }
 
 #root {
@@ -55,7 +70,7 @@ nav {
   display: flex;
   justify-content: space-around;
   min-height: 10vh;
-  background: rgb(65,65,65);
+  background: white;
 }
 
 nav :hover{
@@ -77,17 +92,18 @@ nav :hover{
 
 .home_nav{
   text-decoration: none;
+  display: inline-block;
+  font-size: 42px;
+  vertical-align: bottom;
+  font-family: 'Roboto', sans-serif;
+  line-height: 36px;
 }
 
-#sideBar {
-  width: 250px;
-  display: inline-block;
-  vertical-align: top;
-  background-color: darkgray;
-  min-height: 100vh;
-  padding: 1em;
-  text-align: center;
+#logo {
+  width: 80px;
+  margin-right: 1em;
 }
+
 
 #webcam{
   height: 400px;
@@ -107,28 +123,31 @@ nav :hover{
   margin-left: 4px;
 }
 
-#mapDiv {
-  margin-bottom: 1em;
-  min-width: 1400px;
-  display: inline-block;
-  position: absolute;
-}
+
 
 #logTitle {
   font-size: 30px;
 }
 
+#main {
+  border: 5px solid black;
+}
 
 @media screen and (max-width: 800px) {
-
     #sideBar {
       width: 100%;
       min-height: 250px;
     }
     #mapDiv {
-        width: 90%;
-        position: relative;
+      width: 100%
     }
+    .svg-map {
+        border-top: 5px solid black;
+        width: 100%;
+        position: relative;
+        border-top: none;
+    }
+
 }
 
 .profile-page{
@@ -138,7 +157,6 @@ nav :hover{
   align-items: center;
 
 }
-
 
 .App-logo {
   height: 40vmin;
@@ -152,7 +170,6 @@ nav :hover{
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
 }
 
 .App-link {
