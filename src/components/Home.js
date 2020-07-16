@@ -8,7 +8,6 @@ import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 
-
 class Home extends Component {
   constructor(props){
       super(props)
@@ -22,12 +21,12 @@ class Home extends Component {
       }
       this.saveSearch = this.saveSearch.bind(this);
   }
+
   componentDidMount(){
-    if (fire.database().ref(`${this.props.user.uid}/favourites`)){
       fire.database().ref(`${this.props.user.uid}/favourites`).on("value",res => {
         this.setState({favourites: res.val()})
       })
-    }
+
   }
 
   mapClick = () => {
@@ -57,17 +56,21 @@ class Home extends Component {
   }
 
   handleCheckClick = (item) => {
-
     this.setState({checkBoxChecked: !this.state.checkBoxChecked})
-    console.log(item.id)
     const fav = fire.database().ref().child(this.props.user.uid).child('favourites').child(item.id)
-
-    fav.set(true)
-
+    if (this.state.favourites){
+      if (this.state.favourites[item.id]){
+        fav.remove()
+      }else{
+        fav.set(true)
+      }
+    }else{
+      fav.set(true)
+    }
   }
 
-  checkFavouriteList =(item) => {
-    if( this.state.favourties ) {
+  checkFavouriteList(item){
+    if (this.state.favourites){
       return !!this.state.favourites[item.id]
     }
   }
@@ -75,7 +78,7 @@ class Home extends Component {
   render() {
 
     return (
-      <div>
+      <div id="main">
         <div id="sideBar">
           <h1 id="logTitle">You are logged in {this.props.user.email}</h1>
           <button onClick={this.logout}>Logout</button>

@@ -6,7 +6,7 @@ import {storage} from './fire'
 
 function Nav(props) {
     const navStyle={
-        color: 'white',
+        color: 'black',
         textDecoration: 'none',
         fontWeight: "bold"
     }
@@ -27,10 +27,9 @@ function Nav(props) {
         <nav>
             <ul className="nav-links">
                 <Link style={navStyle} to="/">
-                    <li className="home_nav" >GA World Tour</li>
+                    <img id="logo" src="https://seeklogo.com/images/G/general-assembly-logo-D5C634F07A-seeklogo.com.png" />
+                    <li className="home_nav" > World Tour</li>
                 </Link>
-
-
 
                 {props.user
                 ? (<Link  style={navStyle} to="/profile">
@@ -38,10 +37,7 @@ function Nav(props) {
                         <Avatar src={dlUrl} round={true}  />
                     </Link>)
                 : null}
-
-
             </ul>
-            
         </nav>
     )
 }
