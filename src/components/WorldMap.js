@@ -99,7 +99,6 @@ class WorldMap extends Component {
     const filterYear = this.props.tourCountries.filter( (tour) => this.formatYear(tour.datetime) === this.props.year);
     const filterCountry = _.filter(filterYear, (tour) => {
       if (tour.venue.country === pointedLocation) {
-        console.log(tour);
         return tour
       }}
     );
@@ -165,7 +164,7 @@ class WorldMap extends Component {
           onChange={this._handleOnChange}
           onLocationMouseOver={this._handleMouseOver}
           onLocationMouseOut={this._handleLocationMouseOut}
-          onLocationMouseMove={this._hanldeLocationMouseMove}
+          onLocationMouseMove={this._handleLocationMouseMove}
         />
         <div className="examples__block__map__tooltip" style={this.state.tooltipStyle}>
           { _(events).map( (event) => (<p>{event}</p>))}
