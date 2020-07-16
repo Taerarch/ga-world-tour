@@ -14,16 +14,22 @@ const WebcamCapture = (props) => {
       const uploadTask = storage.ref(`images/${props.user.uid}`);
       uploadTask.putString(imageSrc.split("").slice(23).join(""),"base64");
     }
+    
   };
 
+  
   const download = () => {
-    const uploadTask = storage.ref(`images/${props.user.uid}`);
-    if (uploadTask !== null){
-      uploadTask.getDownloadURL().then((dlUrl)=>{
+    const downloadTask = storage.ref(`images/${props.user.uid}`);
+    if (downloadTask !== null){
+      downloadTask.getDownloadURL().then((dlUrl)=>{
         setUrl(dlUrl)
         //grap a refcence to the user and attach to him
       })
     }
+  }
+
+  const refreshPage = () =>{
+    window.location.reload(false);
   }
 
   return (
@@ -36,6 +42,7 @@ const WebcamCapture = (props) => {
       />
       <button onClick={capture}>Capture photo</button>
       <button onClick={download}>Get photo</button>
+      <button onClick={refreshPage}>Click to reload!</button>
       
       <img
         src={url || "http://via.placeholder.com/300"}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import User from './User';
+import Login from './Login';
+import Signup from './Signup';
 import Home from './Home';
 import Nav from './Nav';
 import Video from './Video';
@@ -42,9 +43,10 @@ class App extends Component {
             <Switch>
               {this.state.user 
                 ? (<Route path="/" exact component={()=><Home user={this.state.user}/>} />) 
-                : (<Route path="/" exact component={User} />)}
+                : (<Route path="/" exact component={Login} />)}
               <Route path="/profile" exact component ={()=><Profile user={this.state.user}/>} />
               <Route path="/video" exact component ={()=><Video user={this.state.user}/>} />
+              <Route path="/signup" exact component ={()=><Signup user={this.state.user}/>} />
 
             </Switch>
           </div>
