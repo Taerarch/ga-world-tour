@@ -33,9 +33,6 @@ class Home extends Component {
     this.child._mapTourCountry()
   }
 
-  logout(){
-    fire.auth().signOut();
-  }
 
   saveSearch(band, year, url) {
     this.setState({band: band, year: year, url: url}, () => {
@@ -74,8 +71,6 @@ class Home extends Component {
     return (
       <div id="main">
         <div id="sideBar">
-          <h1 id="logTitle">You are logged in {this.props.user.email}</h1>
-          <button onClick={this.logout}>Logout</button>
           <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
           <button onClick={this.mapClick}>Map Tours</button>
           <div id="tourList">
