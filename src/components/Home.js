@@ -2,10 +2,13 @@ import React, { Component } from 'react'
 import Map from './WorldMap'
 import fire from './fire'
 import axios from 'axios'
+<<<<<<< HEAD
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
+=======
+>>>>>>> 2f0734ad54b32eb7d70a80634b5df1d7c7c3fae4
 
 
 class Home extends Component {

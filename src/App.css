@@ -167,3 +167,10 @@ nav :hover{
 .error{
   color: darkred;
 }
+
+.examples__block__map__tooltip {
+  position: fixed;
+  padding: 10px;
+  border: 1px solid darkgray;
+  background-color: white;
+}
