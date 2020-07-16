@@ -114,13 +114,14 @@ class WorldMap extends Component {
     const longArray = findYear.map((tour) => tour.venue.longitude)
     const filterCountryArray = _.uniq(countryArray)
 
-    const plotDots = (index = 0) => {
-      if (index !== countryArray.length) {
-        this._handlePlotDots(latArray[index], longArray[index])
-        setTimeout(() => plotDots(index + 1), 1000)
-      }
-    }
-    plotDots();
+    // const plotDots = (index = 0) => {
+    //   if (index !== countryArray.length) {
+    //     this._handlePlotDots(latArray[index], longArray[index])
+    //     setTimeout(() => plotDots(index + 1), 1000)
+    //   }
+    // }
+    // plotDots();
+    // tried to plot dots based on coordinates.
 
     const colourCountries = (index = 0) => {
       if (index !== filterCountryArray.length) {

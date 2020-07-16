@@ -46,13 +46,13 @@ class Home extends Component {
 
   render() {
     return (
-      <div>
+      <div id="main">
         <div id="sideBar">
+        <button onClick={this.logout}>Logout</button>
+
           <h1 id="logTitle">You are logged in {this.props.user.email}</h1>
-          <button onClick={this.logout}>Logout</button>
           <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
           <button onClick={this.mapClick}>Map Tours</button>
-
           <div id="tourList">
             {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map(t_filtered => (
               <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)} {t_filtered.venue.latitude} {t_filtered.venue.longitude}</p>
