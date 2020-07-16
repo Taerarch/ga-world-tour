@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import Map from './WorldMap'
 import fire from './fire'
 import axios from 'axios'
-import Spotify from './Spotify'
 
 
 class Home extends Component {
@@ -58,7 +57,6 @@ class Home extends Component {
           </div>
         </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />
-        <Spotify />
       </div>
     )
   }

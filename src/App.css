@@ -139,9 +139,9 @@ nav :hover{
 
 }
 
-.App {
+/* .App {
   text-align: center;
-}
+} */
 
 .App-logo {
   height: 40vmin;
@@ -169,4 +169,11 @@ nav :hover{
 
 .error{
   color: darkred;
+}
+
+.examples__block__map__tooltip {
+  position: fixed;
+  padding: 10px;
+  border: 1px solid darkgray;
+  background-color: white;
 }

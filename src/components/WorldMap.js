@@ -1,16 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components'
 import World from '@svg-maps/world';
-import { CheckboxSVGMap } from 'react-svg-map';
+import { SVGMap } from 'react-svg-map';
 import 'react-svg-map/lib/index.css'
 import { getLocationName } from './MapFunctions';
 import 'react-svg-map/src/svg-map.scss'
 import WorldInfo from '../MapUtilities/MapInfo.js'
 import '../App.css'
 import _ from 'underscore'
-
-
-const emptyCountries = []
 
 const StyledDot = styled.h1`
   left: ${props => props.long + 'px'};
@@ -30,18 +27,27 @@ class WorldMap extends Component {
     this.state = {
       allCountries: WorldInfo.worldInfo.locations,
       country: '',
-      selectedLocations: emptyCountries,
+      events: {
+        venues: [],
+        cities: [],
+        dates: [],
+      },
       focusedLocation: '',
       long: 400,
-      lat: 400
-    }
+      lat: 400,
+      pointedLocation: null,
+      tooltipStyle: {
+        display: 'none',
+      }
+    };
     this._handleCountry = this._handleCountry.bind(this);
-    // this._handleMouseOver = this._handleMouseOver.bind(this);
-    this._handleLocationFocus = this._handleLocationFocus.bind(this);
-    this._handleLocationBlur = this._handleLocationBlur.bind(this);
+    this._handleMouseOver = this._handleMouseOver.bind(this);
+    this._handleLocationMouseOut = this._handleLocationMouseOut.bind(this);
     this._handleOnChange = this._handleOnChange.bind(this);
     this._handleColorCountry = this._handleColorCountry.bind(this);
     this._mapTourCountry = this._mapTourCountry.bind(this);
+    this._hanldeLocationMouseMove = this._handleLocationMouseMove.bind(this);
+    this.getLocationClassName = this.getLocationClassName.bind(this);
   }
 
   componentDidMount() {
@@ -55,22 +61,33 @@ class WorldMap extends Component {
     this.setState({ country: event.target.value });
   }
 
-  _handleLocationFocus(event) {
-  const focusedLocation = getLocationName(event);
-  this.setState({ focusedLocation: focusedLocation });
+  _handleLocationMouseOut(event) {
+    this.setState({
+      pointedLocation: null,
+      tooltipStyle: {
+        display: 'none'
+      }
+    });
   }
 
-  _handleLocationBlur() {
-  this.setState({ focusedLocation: null });
+  _handleLocationMouseMove(event) {
+    const tooltipStyle = {
+      position: 'fixed',
+      display: 'block',
+      top: event.clientY + 10,
+      left: event.clientX + 100
+    };
+    this.setState({ tooltipStyle })
   }
 
-  // _handleMouseOver(event) {
-  //   const focusedLocation = getLocationName(event);
-  //   this.setState({ focusedLocation : focusedLocation});
-  // }
+  getLocationClassName(location, index) {
+    console.log(location, index, 'aqui');
+    return ('svg-map__location');
+  }
+
 
   _handleOnChange(selectedNodes) {
-    console.log(selectedNodes);
+    // console.log(selectedNodes);
 		this.setState(prevState => {
 			return {
 				...prevState,
@@ -78,10 +95,6 @@ class WorldMap extends Component {
 			};
 		});
 	}
-
-
-
-
 
   _handleColorCountry(tourCountry) {
     let allCountries = this.state.allCountries.find(country => country.name === tourCountry)
@@ -95,6 +108,30 @@ class WorldMap extends Component {
   formatYear(string) {
     var options = { year: 'numeric' };
     return new Date(string).toLocaleDateString([], options);
+  }
+
+  _handleMouseOver(event) {
+    const pointedLocation = getLocationName(event);
+    const filterYear = this.props.tourCountries.filter( (tour) => this.formatYear(tour.datetime) === this.props.year);
+    const filterCountry = _.filter(filterYear, (tour) => {
+      if (tour.venue.country === pointedLocation) {
+        console.log(tour);
+        return tour
+      }}
+    );
+
+    const venues = filterCountry.map( (tour) => tour.venue.name);
+    const cities = filterCountry.map( (tour) => tour.venue.city);
+    const dates = filterCountry.map( (tour) => tour.datetime);
+
+    this.setState({
+      pointedLocation : pointedLocation,
+      events: {
+        venue: venues,
+        city: cities,
+        date: dates
+      }
+    });
   }
 
   _mapTourCountry() {
@@ -129,23 +166,53 @@ class WorldMap extends Component {
     colourCountries();
   }
   _handlePlotDots(la, lon) {
-    console.log(parseFloat(la), parseFloat(lon));
+    // console.log(parseFloat(la), parseFloat(lon));
 
     return (<StyledDot long={parseFloat(lon)+300} lat={parseFloat(la)+300}>.</StyledDot>)
   }
   // {dots.map((dot, index) => <StyledDot long={dot[0]} lat={dot[1]}>.</StyledDot>
   // )}
 
+
   render() {
     const makeDots = this._handlePlotDots();
+    let cities;
+    let venues;
+    let dates;
+    let events;
+
+    if(!this.state.events) {
+      events = {
+        cities: 'City',
+        venues: 'Venue',
+        dates: 'Date'
+      };
+    } else {
+      events = {
+        cities: this.state.events.city,
+        venues: this.state.events.venue,
+        dates: this.state.events.date
+      };
+    }
+
     return (
       <div id="mapDiv">
         {makeDots}
         <StyledDot long={this.state.long}>.</StyledDot>
-        <CheckboxSVGMap map={World}
-            onLocationFocus={this._handleLocationFocus}
-						onLocationBlur={this._handleLocationBlur}
-						onChange={this._handleOnChange} />
+        <SVGMap map={World}
+            getLocationClassName={this.getLocationClassName}
+						onChange={this._handleOnChange}
+            onLocationMouseOver={this._handleMouseOver}
+            onLocationMouseOut={this._handleLocationMouseOut}
+            onLocationMouseMove={this._hanldeLocationMouseMove}
+           />
+           <div
+             className="examples__block__map__tooltip"
+             style={this.state.tooltipStyle}
+             >
+              { _(events).map( (event) => (<p>{event}</p>))}
+            </div>
+
       </div>
     );
   }
