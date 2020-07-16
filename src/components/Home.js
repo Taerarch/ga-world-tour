@@ -89,7 +89,7 @@ class Home extends Component {
                 checkedIcon={<Favorite />} name="checkedH" />}
                 />
                 </p>
-            })}
+              })}
             </div>
           </div>
         </div>

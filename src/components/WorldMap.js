@@ -17,11 +17,6 @@ class WorldMap extends Component {
     this.state = {
       allCountries: WorldInfo.worldInfo.locations,
       country: '',
-      events: {
-        venues: [],
-        cities: [],
-        dates: [],
-      },
       focusedLocation: '',
       pointedLocation: null,
       tooltipStyle: {
@@ -102,19 +97,14 @@ class WorldMap extends Component {
         return tour
       }}
     );
-
-    const venues = filterCountry.map( (tour) => tour.venue.name);
-    const cities = filterCountry.map( (tour) => tour.venue.city);
-    const dates = filterCountry.map( (tour) => tour.datetime);
-
     this.setState({
       pointedLocation : pointedLocation,
-      events: {
-        venue: venues,
-        city: cities,
-        date: dates
-      }
     });
+  }
+
+  formatDate(string) {
+    var options = { year: 'numeric', month: 'long', day: 'numeric' };
+    return new Date(string).toLocaleDateString([], options);
   }
 
   _mapTourCountry() {
@@ -139,24 +129,6 @@ class WorldMap extends Component {
     colourCountries();
   }
   render() {
-    let cities;
-    let venues;
-    let dates;
-    let events;
-
-    if(!this.state.events) {
-      events = {
-        cities: 'City',
-        venues: 'Venue',
-        dates: 'Date'
-      };
-    } else {
-      events = {
-        cities: this.state.events.city,
-        venues: this.state.events.venue,
-        dates: this.state.events.date
-      };
-    }
     return (
       <div id="mapDiv">
         <SVGMap map={World}
@@ -167,8 +139,11 @@ class WorldMap extends Component {
           onLocationMouseMove={this._handleLocationMouseMove}
         />
         <div className="examples__block__map__tooltip" style={this.state.tooltipStyle}>
-          { _(events).map( (event) => (<p>{event}</p>))}
-          </div>
+          {this.props.tourCountries.filter((t) => this.formatYear(t.datetime) === this.props.year && t.venue.country === this.state.pointedLocation).map((t_filtered) => {
+            return <p>{t_filtered.venue.city}, {t_filtered.venue.country}<br></br> {this.formatDate(t_filtered.datetime)} <br></br>
+            </p>
+          })}
+        </div>
       </div>
     );
   }

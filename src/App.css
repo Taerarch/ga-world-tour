@@ -18,8 +18,7 @@ svg {
   width: 81%;
   display: inline-block;
   border: 5px solid black;
-}
-.svg-map__location {
+  border-top: none;
 }
 
 svg .country:hover {
@@ -135,14 +134,12 @@ nav :hover{
 }
 @media screen and (max-width: 1400px) {
   #sideBar {
-    width: 100%;
-    min-height: 250px;
-    max-width: 1399px;
-    height: 300px;
+    vertical-align: top;
+    width: 30vh;
+    min-height: 90vh;
     overflow-y: auto;
     overflow-x: hidden;
     transform: rotate(-90deg);
-    transform-origin: right top;
   }
   #sideBar > div {
     transform: rotate(90deg);
@@ -152,7 +149,7 @@ nav :hover{
     width: 128px;
   }
   #mapDiv {
-    width: 100%
+    width: 100%;
   }
   .svg-map {
       border-top: 5px solid black;
