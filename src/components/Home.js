@@ -65,8 +65,11 @@ class Home extends Component {
 
   }
 
-  checkFavouriteList =(item) => !!this.state.favourites[item.id]
-
+  checkFavouriteList(item) {
+    if () {
+      !!this.state.favourites[item.id]
+    }
+  }
   render() {
     return (
       <div id="main">

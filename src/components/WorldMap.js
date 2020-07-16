@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import styled from 'styled-components'
 import World from '@svg-maps/world';
 import { SVGMap } from 'react-svg-map';
 import 'react-svg-map/lib/index.css'
@@ -9,17 +8,6 @@ import 'react-svg-map/src/svg-map.scss'
 import WorldInfo from '../MapUtilities/MapInfo.js'
 import '../App.css'
 import _ from 'underscore'
-import leaflet from 'leaflet'
-
-const StyledDot = styled.h1`
-  left: ${props => props.long + 'px'};
-  top: ${props => props.lat + 'px'};
-  position: absolute;
-  color: red;
-  font-size: 60px;
-  margin: 0px;
-  line-height: 1px;
-`
 
 
 
@@ -40,6 +28,13 @@ class WorldMap extends Component {
         display: 'none',
       }
     };
+
+      pointedLocation: null,
+      tooltipStyle: {
+        display: 'none',
+      }
+    };
+>>>>>>> 02d74b71ccbab7a132adc908f95e9ccc45b54c17
     this._handleCountry = this._handleCountry.bind(this);
     this._handleMouseOver = this._handleMouseOver.bind(this);
     this._handleLocationMouseOut = this._handleLocationMouseOut.bind(this);
@@ -145,18 +140,7 @@ class WorldMap extends Component {
 
     const findYear = this.props.tourCountries.filter((tour) => this.formatYear(tour.datetime) === this.props.year)
     const countryArray = findYear.map((tour) => tour.venue.country)
-    const latArray = findYear.map((tour) => tour.venue.latitude)
-    const longArray = findYear.map((tour) => tour.venue.longitude)
     const filterCountryArray = _.uniq(countryArray)
-
-    // const plotDots = (index = 0) => {
-    //   if (index !== countryArray.length) {
-    //     this._handlePlotDots(latArray[index], longArray[index])
-    //     setTimeout(() => plotDots(index + 1), 1000)
-    //   }
-    // }
-    // plotDots();
-    // tried to plot dots based on coordinates.
 
     const colourCountries = (index = 0) => {
       if (index !== filterCountryArray.length) {

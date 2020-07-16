@@ -31,18 +31,13 @@ function Nav(props) {
                     <li className="home_nav" > World Tour</li>
                 </Link>
 
-
-
                 {props.user
                 ? (<Link  style={navStyle} to="/profile">
 
                         <Avatar src={dlUrl} round={true}  />
                     </Link>)
                 : null}
-
-
             </ul>
-            
         </nav>
     )
 }
