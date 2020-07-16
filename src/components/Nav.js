@@ -21,7 +21,6 @@ function Nav(props) {
     if (downloadTask !== null){
         downloadTask.getDownloadURL().then((dlUrl)=>{
           setUrl(dlUrl)
-          //grap a refcence to the user and attach to him
         })
     }
     return (
@@ -38,12 +37,12 @@ function Nav(props) {
                 ? (<Link  style={navStyle} to="/profile">
 
                         <Avatar src={dlUrl} round={true}  />
-                    </Link>
-                    )
+                    </Link>)
                 : null}
 
 
             </ul>
+            
         </nav>
     )
 }

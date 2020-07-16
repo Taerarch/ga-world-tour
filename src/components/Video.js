@@ -23,7 +23,6 @@ const WebcamCapture = (props) => {
     if (downloadTask !== null){
       downloadTask.getDownloadURL().then((dlUrl)=>{
         setUrl(dlUrl)
-        //grap a refcence to the user and attach to him
       })
     }
   }
