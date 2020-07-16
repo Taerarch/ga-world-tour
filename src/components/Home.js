@@ -21,12 +21,12 @@ class Home extends Component {
       }
       this.saveSearch = this.saveSearch.bind(this);
   }
+
   componentDidMount(){
-    if (fire.database().ref(`${this.props.user.uid}/favourites`)){
       fire.database().ref(`${this.props.user.uid}/favourites`).on("value",res => {
         this.setState({favourites: res.val()})
       })
-    }
+    
   }
 
   mapClick = () => {
@@ -54,18 +54,23 @@ class Home extends Component {
 
   handleCheckClick = (item) => {
     this.setState({checkBoxChecked: !this.state.checkBoxChecked})
-    console.log(item.id)
     const fav = fire.database().ref().child(this.props.user.uid).child('favourites').child(item.id)
+    if (this.state.favourites){
+      if (this.state.favourites[item.id]){
+        fav.remove()
+      }else{
+        fav.set(true)
+      }
+    }else{
       fav.set(true)
+    }
   }
 
-  // checkFavouriteList(item) {
-  //   if (fire.database().ref().child(this.props.user.uid).child('favourites')) {
-  //     !!this.state.favourites[item.id]
-  //   }
-  // }
-  checkFavouriteList = (item) => !!this.state.favourites[item.id]
-
+  checkFavouriteList(item){
+    if (this.state.favourites){
+      return !!this.state.favourites[item.id]
+    }
+  }
 
   render() {
     return (
