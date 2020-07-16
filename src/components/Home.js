@@ -66,7 +66,7 @@ class Home extends Component {
   }
 
   checkFavouriteList(item) {
-    if () {
+    if (fire.database().ref().child(this.props.user.uid).child('favourites')) {
       !!this.state.favourites[item.id]
     }
   }

@@ -23,25 +23,20 @@ class WorldMap extends Component {
         dates: [],
       },
       focusedLocation: '',
+      dotArray: [],
       pointedLocation: null,
       tooltipStyle: {
         display: 'none',
       }
     };
 
-      pointedLocation: null,
-      tooltipStyle: {
-        display: 'none',
-      }
-    };
->>>>>>> 02d74b71ccbab7a132adc908f95e9ccc45b54c17
     this._handleCountry = this._handleCountry.bind(this);
     this._handleMouseOver = this._handleMouseOver.bind(this);
     this._handleLocationMouseOut = this._handleLocationMouseOut.bind(this);
     this._handleOnChange = this._handleOnChange.bind(this);
     this._handleColorCountry = this._handleColorCountry.bind(this);
     this._mapTourCountry = this._mapTourCountry.bind(this);
-    this._hanldeLocationMouseMove = this._handleLocationMouseMove.bind(this);
+    this._handleLocationMouseMove = this._handleLocationMouseMove.bind(this);
     this.getLocationClassName = this.getLocationClassName.bind(this);
   }
 
@@ -59,9 +54,7 @@ class WorldMap extends Component {
   _handleLocationMouseOut(event) {
     this.setState({
       pointedLocation: null,
-      tooltipStyle: {
-        display: 'none'
-      }
+      tooltipStyle: { display: 'none'}
     });
   }
 
@@ -80,9 +73,7 @@ class WorldMap extends Component {
     return ('svg-map__location');
   }
 
-
   _handleOnChange(selectedNodes) {
-    // console.log(selectedNodes);
 		this.setState(prevState => {
 			return {
 				...prevState,
@@ -93,7 +84,6 @@ class WorldMap extends Component {
 
   _handleColorCountry(tourCountry) {
     let allCountries = this.state.allCountries.find(country => country.name === tourCountry)
-
     if (allCountries) {
       const country = document.getElementById(allCountries.id); //get the toured countries,
       country.style.fill = 'orange';
@@ -150,34 +140,7 @@ class WorldMap extends Component {
     }
     colourCountries();
   }
-  _handlePlotDots(la, lon) {
-<<<<<<< HEAD
-    console.log(parseFloat(la), parseFloat(lon));
-    this.setState({dotArray: [...this.state.dotArray, <StyledDot long={parseFloat(lon)/4556} lat={parseFloat(la)+666}>.</StyledDot>]})
-=======
-
-    return (<StyledDot long={parseFloat(lon)+300} lat={parseFloat(la)+300}>.</StyledDot>)
->>>>>>> 02d74b71ccbab7a132adc908f95e9ccc45b54c17
-  }
-  // {dots.map((dot, index) => <StyledDot long={dot[0]} lat={dot[1]}>.</StyledDot>
-  // )}
-
-<<<<<<< HEAD
-  // {this.state.dotArray.map((dot) => dot)}
-  // <StyledDot long={27} lat={16}>.</StyledDot>
-  // <StyledDot long={777} lat={666}>.</StyledDot>
-
   render() {
-    return (
-      <div id="mapDiv">
-        <CheckboxSVGMap map={World}
-            onLocationFocus={this._handleLocationFocus}
-						onLocationBlur={this._handleLocationBlur}
-						onChange={this._handleOnChange} />
-=======
-
-  render() {
-    const makeDots = this._handlePlotDots();
     let cities;
     let venues;
     let dates;
@@ -196,26 +159,20 @@ class WorldMap extends Component {
         dates: this.state.events.date
       };
     }
-
     return (
       <div id="mapDiv">
-        {makeDots}
-        <StyledDot long={this.state.long}>.</StyledDot>
         <SVGMap map={World}
-            getLocationClassName={this.getLocationClassName}
-						onChange={this._handleOnChange}
-            onLocationMouseOver={this._handleMouseOver}
-            onLocationMouseOut={this._handleLocationMouseOut}
-            onLocationMouseMove={this._hanldeLocationMouseMove}
-           />
-           <div
-             className="examples__block__map__tooltip"
-             style={this.state.tooltipStyle}
-             >
-              { _(events).map( (event) => (<p>{event}</p>))}
-            </div>
-
->>>>>>> 02d74b71ccbab7a132adc908f95e9ccc45b54c17
+          onLocationFocus={this._handleLocationFocus}
+          onLocationBlur={this._handleLocationBlur}
+          getLocationClassName={this.getLocationClassName}
+  				onChange={this._handleOnChange}
+          onLocationMouseOver={this._handleMouseOver}
+          onLocationMouseOut={this._handleLocationMouseOut}
+          onLocationMouseMove={this._handleLocationMouseMove}
+        />
+        <div className="examples__block__map__tooltip" style={this.state.tooltipStyle}>
+          { _(events).map( (event) => (<p>{event}</p>))}
+          </div>
       </div>
     );
   }
