@@ -17,6 +17,7 @@ class App extends Component {
       user: {}
     }
   }
+  
   componentDidMount(){
     this.authListener()
   }
@@ -31,6 +32,7 @@ class App extends Component {
       }
     })
   }
+  
 
   render(){
     return (
@@ -47,7 +49,7 @@ class App extends Component {
               <Route path="/profile" exact component ={()=><Profile user={this.state.user}/>} />
               <Route path="/video" exact component ={()=><Video user={this.state.user}/>} />
               <Route path="/signup" exact component ={()=><Signup user={this.state.user}/>} />
-
+              
             </Switch>
           </div>
 

@@ -129,7 +129,6 @@ class WorldMap extends Component {
     colourCountries();
   }
   _handlePlotDots(la, lon) {
-    console.log(parseFloat(la), parseFloat(lon));
 
     return (<StyledDot long={parseFloat(lon)+300} lat={parseFloat(la)+300}>.</StyledDot>)
   }

@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import Map from './WorldMap'
 import fire from './fire'
 import axios from 'axios'
-// const WEEZER_URL = 'https://rest.bandsintown.com/artists/weezer/events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=upcoming.json';
-// let BANDS_URL = `https://rest.bandsintown.com/artists//events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=upcoming`
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Favorite from '@material-ui/icons/Favorite';
+import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 
 class Home extends Component {
@@ -13,9 +15,18 @@ class Home extends Component {
         tours: [],
         band: "",
         url: ``,
-        year: ""
+        year: "",
+        checkBoxChecked: [],
+        favourites: {}
       }
       this.saveSearch = this.saveSearch.bind(this);
+  }
+  componentDidMount(){
+    if (fire.database().ref(`${this.props.user.uid}/favourites`)){
+      fire.database().ref(`${this.props.user.uid}/favourites`).on("value",res => {
+        this.setState({favourites: res.val()})
+      })
+    }
   }
 
   mapClick = () => {
@@ -44,6 +55,18 @@ class Home extends Component {
     return new Date(string).toLocaleDateString([], options);
   }
 
+  handleCheckClick = (item) => {
+    
+    this.setState({checkBoxChecked: !this.state.checkBoxChecked})
+    console.log(item.id)
+    const fav = fire.database().ref().child(this.props.user.uid).child('favourites').child(item.id)
+    
+      fav.set(true)
+
+  }
+
+  checkFavouriteList =(item) => !!this.state.favourites[item.id]
+
   render() {
     return (
       <div>
@@ -53,9 +76,15 @@ class Home extends Component {
           <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
           <button onClick={this.mapClick}>Map Tours</button>
           <div id="tourList">
-            {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map(t_filtered => (
-              <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)}</p>
-            ))}
+            {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map((t_filtered) => {
+              const isChecked = this.checkFavouriteList(t_filtered)
+              return <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)} <FormControlLabel
+              control={<Checkbox checked={isChecked} icon={<FavoriteBorder />} 
+              onChange={() => this.handleCheckClick(t_filtered)} value={t_filtered}
+              checkedIcon={<Favorite />} name="checkedH" />}
+              />
+              </p>         
+          })}
           </div>
         </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />

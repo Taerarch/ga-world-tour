@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import fire from './fire';
-import {Link} from 'react-router-dom'
+import {withRouter} from 'react-router-dom'
 
-export default class Signup extends Component {
+class Signup extends Component {
     constructor(props){
         super(props);
         this.handleChange = this.handleChange.bind(this);
@@ -20,7 +20,8 @@ export default class Signup extends Component {
         e.preventDefault();
         fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.password).then((u)=>{
             this.setState({message: "Signed up"})
-            return <Link to='/' />;
+            this.props.history.push("/")
+            
         }).catch((err)=>{
             this.setState({message: err.message})
         })
@@ -75,3 +76,4 @@ export default class Signup extends Component {
         )
     }
 }
+export default withRouter(Signup) 

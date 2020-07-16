@@ -26,6 +26,7 @@ class Login extends Component {
             [e.target.name] : e.target.value
         })
     }
+    
     render()
     {
         return(
