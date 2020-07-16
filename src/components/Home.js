@@ -2,13 +2,11 @@ import React, { Component } from 'react'
 import Map from './WorldMap'
 import fire from './fire'
 import axios from 'axios'
-<<<<<<< HEAD
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Favorite from '@material-ui/icons/Favorite';
 import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
-=======
->>>>>>> 2f0734ad54b32eb7d70a80634b5df1d7c7c3fae4
+
 
 
 class Home extends Component {
@@ -59,18 +57,23 @@ class Home extends Component {
   }
 
   handleCheckClick = (item) => {
-    
+
     this.setState({checkBoxChecked: !this.state.checkBoxChecked})
     console.log(item.id)
     const fav = fire.database().ref().child(this.props.user.uid).child('favourites').child(item.id)
-    
-      fav.set(true)
+
+    fav.set(true)
 
   }
 
-  checkFavouriteList =(item) => !!this.state.favourites[item.id]
+  checkFavouriteList =(item) => {
+    if( this.state.favourties ) {
+      return !!this.state.favourites[item.id]
+    }
+  }
 
   render() {
+
     return (
       <div>
         <div id="sideBar">
@@ -82,11 +85,11 @@ class Home extends Component {
             {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map((t_filtered) => {
               const isChecked = this.checkFavouriteList(t_filtered)
               return <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)} <FormControlLabel
-              control={<Checkbox checked={isChecked} icon={<FavoriteBorder />} 
+              control={<Checkbox checked={isChecked} icon={<FavoriteBorder />}
               onChange={() => this.handleCheckClick(t_filtered)} value={t_filtered}
               checkedIcon={<Favorite />} name="checkedH" />}
               />
-              </p>         
+              </p>
           })}
           </div>
         </div>
