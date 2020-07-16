@@ -52,10 +52,12 @@ class Home extends Component {
           <button onClick={this.logout}>Logout</button>
           <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
           <button onClick={this.mapClick}>Map Tours</button>
+
           <div id="tourList">
             {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map(t_filtered => (
-              <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)}</p>
+              <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)} {t_filtered.venue.latitude} {t_filtered.venue.longitude}</p>
             ))}
+
           </div>
         </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />

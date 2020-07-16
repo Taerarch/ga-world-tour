@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
 import styled from 'styled-components'
 import World from '@svg-maps/world';
 import { CheckboxSVGMap } from 'react-svg-map';
@@ -8,6 +9,7 @@ import 'react-svg-map/src/svg-map.scss'
 import WorldInfo from '../MapUtilities/MapInfo.js'
 import '../App.css'
 import _ from 'underscore'
+import leaflet from 'leaflet'
 
 
 const emptyCountries = []
@@ -32,8 +34,8 @@ class WorldMap extends Component {
       country: '',
       selectedLocations: emptyCountries,
       focusedLocation: '',
-      long: 400,
-      lat: 400
+      dotArray: []
+
     }
     this._handleCountry = this._handleCountry.bind(this);
     // this._handleMouseOver = this._handleMouseOver.bind(this);
@@ -101,7 +103,7 @@ class WorldMap extends Component {
     const emptyMap = () => {
       const greenWorld = this.state.allCountries
       // The map function will iterate every country in the world and will paint it green.
-      greenWorld.map( (country) => document.getElementById(country.id).style.fill = '#a1d99b' )
+      greenWorld.map( (country) => document.getElementById(country.id).style.fill = '#ccc' )
     }
 
     emptyMap(); // painting the world green before a new search.
@@ -130,18 +132,18 @@ class WorldMap extends Component {
   }
   _handlePlotDots(la, lon) {
     console.log(parseFloat(la), parseFloat(lon));
-
-    return (<StyledDot long={parseFloat(lon)+300} lat={parseFloat(la)+300}>.</StyledDot>)
+    this.setState({dotArray: [...this.state.dotArray, <StyledDot long={parseFloat(lon)/4556} lat={parseFloat(la)+666}>.</StyledDot>]})
   }
   // {dots.map((dot, index) => <StyledDot long={dot[0]} lat={dot[1]}>.</StyledDot>
   // )}
 
+  // {this.state.dotArray.map((dot) => dot)}
+  // <StyledDot long={27} lat={16}>.</StyledDot>
+  // <StyledDot long={777} lat={666}>.</StyledDot>
+
   render() {
-    const makeDots = this._handlePlotDots();
     return (
       <div id="mapDiv">
-        {makeDots}
-        <StyledDot long={this.state.long}>.</StyledDot>
         <CheckboxSVGMap map={World}
             onLocationFocus={this._handleLocationFocus}
 						onLocationBlur={this._handleLocationBlur}
