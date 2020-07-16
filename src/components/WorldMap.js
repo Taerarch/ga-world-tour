@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import styled from 'styled-components'
 import World from '@svg-maps/world';
 import { CheckboxSVGMap } from 'react-svg-map';
 import 'react-svg-map/lib/index.css'
@@ -8,7 +9,20 @@ import WorldInfo from '../MapUtilities/MapInfo.js'
 import '../App.css'
 import _ from 'underscore'
 
+
 const emptyCountries = []
+
+const StyledDot = styled.h1`
+  left: ${props => props.long + 'px'};
+  top: ${props => props.lat + 'px'};
+  position: absolute;
+  color: red;
+  font-size: 60px;
+  margin: 0px;
+  line-height: 1px;
+`
+
+
 
 class WorldMap extends Component {
   constructor(props) {
@@ -18,6 +32,8 @@ class WorldMap extends Component {
       country: '',
       selectedLocations: emptyCountries,
       focusedLocation: '',
+      long: 400,
+      lat: 400
     }
     this._handleCountry = this._handleCountry.bind(this);
     // this._handleMouseOver = this._handleMouseOver.bind(this);
@@ -63,6 +79,10 @@ class WorldMap extends Component {
 		});
 	}
 
+
+
+
+
   _handleColorCountry(tourCountry) {
     let allCountries = this.state.allCountries.find(country => country.name === tourCountry)
 
@@ -88,26 +108,40 @@ class WorldMap extends Component {
 
     const findYear = this.props.tourCountries.filter((tour) => this.formatYear(tour.datetime) === this.props.year)
     const countryArray = findYear.map((tour) => tour.venue.country)
+    const latArray = findYear.map((tour) => tour.venue.latitude)
+    const longArray = findYear.map((tour) => tour.venue.longitude)
     const filterCountryArray = _.uniq(countryArray)
+
+    const plotDots = (index = 0) => {
+      if (index !== countryArray.length) {
+        this._handlePlotDots(latArray[index], longArray[index])
+        setTimeout(() => plotDots(index + 1), 1000)
+      }
+    }
+    plotDots();
 
     const colourCountries = (index = 0) => {
       if (index !== filterCountryArray.length) {
         this._handleColorCountry(filterCountryArray[index])
-        setTimeout(() => colourCountries(index + 1), 100)
+        setTimeout(() => colourCountries(index + 1), 1000)
       }
     }
     colourCountries();
   }
+  _handlePlotDots(la, lon) {
+    console.log(parseFloat(la), parseFloat(lon));
 
-
-  // <button onClick={this._mapTourCountry}>Color Map</button>
-
-
-
+    return (<StyledDot long={parseFloat(lon)+300} lat={parseFloat(la)+300}>.</StyledDot>)
+  }
+  // {dots.map((dot, index) => <StyledDot long={dot[0]} lat={dot[1]}>.</StyledDot>
+  // )}
 
   render() {
+    const makeDots = this._handlePlotDots();
     return (
       <div id="mapDiv">
+        {makeDots}
+        <StyledDot long={this.state.long}>.</StyledDot>
         <CheckboxSVGMap map={World}
             onLocationFocus={this._handleLocationFocus}
 						onLocationBlur={this._handleLocationBlur}
