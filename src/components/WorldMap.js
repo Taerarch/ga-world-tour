@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import World from '@svg-maps/world';
 import { SVGMap } from 'react-svg-map';
 import 'react-svg-map/lib/index.css';
@@ -69,7 +68,6 @@ class WorldMap extends Component {
 
   _handleMouseOver(event) { //set the state of pointedLocation and filters the concerts for the hover info.
     const pointedLocation = getLocationName(event);
-    const filterYear = this.props.tourCountries.filter( (tour) => this.formatYear(tour.datetime) === this.props.year);
 
     this.setState({
       pointedLocation : pointedLocation,
