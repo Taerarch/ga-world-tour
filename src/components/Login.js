@@ -12,20 +12,20 @@ class Login extends Component {
         message: ""
         }
     }
-    login(e){
+    login(e){ //Sign in
         e.preventDefault();
         fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then((u)=>{
             this.setState({message: u.message})
         }).catch((err)=>{
             this.setState({message: err.message})
 
-        })
+        }) 
     }
-    handleChange(e){
+    handleChange(e){ //Reading inputs
         this.setState({
             [e.target.name] : e.target.value
         })
-    }
+    } 
     
     render()
     {

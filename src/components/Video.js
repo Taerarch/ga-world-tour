@@ -8,17 +8,16 @@ const WebcamCapture = (props) => {
   const webcamRef = React.useRef(null);
   const [url, setUrl] = React.useState("");
 
-  const capture = () => {
+  const capture = () => { //Take a picture and save it in firbase storage
     const imageSrc = webcamRef.current.getScreenshot();
     if (imageSrc !== null){
       const uploadTask = storage.ref(`images/${props.user.uid}`);
       uploadTask.putString(imageSrc.split("").slice(23).join(""),"base64");
     }
-    
   };
 
   
-  const download = () => {
+  const download = () => { //Get the from the storage if it is available.
     const downloadTask = storage.ref(`images/${props.user.uid}`);
     if (downloadTask !== null){
       downloadTask.getDownloadURL().then((dlUrl)=>{
@@ -27,7 +26,7 @@ const WebcamCapture = (props) => {
     }
   }
 
-  const refreshPage = () =>{
+  const refreshPage = () =>{ //Refresh the page and show the changes
     window.location.reload(false);
   }
 

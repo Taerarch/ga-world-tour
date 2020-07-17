@@ -22,7 +22,7 @@ class App extends Component {
     this.authListener()
   }
 
-  authListener(){
+  authListener(){ //Check for login status
     fire.auth().onAuthStateChanged((user) =>{
       if(user){
         this.setState({user})

@@ -7,7 +7,7 @@ import {storage} from './fire'
 import GAlogo from '../GAlogo.png'
 
 function Nav(props) {
-    const navStyle={
+    const navStyle={ //Styles
         color: 'black',
         textDecoration: 'none',
         fontWeight: "bold"
@@ -15,12 +15,14 @@ function Nav(props) {
     const logoStyle={
         marginLeft: "40px"
     }
+
     const [dlUrl, setUrl] = React.useState("");
 
-    const logout = () => {
+    const logout = () => { //Signout 
       fire.auth().signOut();
     }
 
+    //Get the profile picture for navbar avatar
     let downloadTask = null;
     if (props.user !== null){
         downloadTask = storage.ref(`images/${props.user.uid}`);
@@ -31,7 +33,6 @@ function Nav(props) {
           setUrl(dlUrl)
         })
     }
-
 
     return (
         <nav>

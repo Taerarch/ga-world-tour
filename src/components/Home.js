@@ -22,7 +22,7 @@ class Home extends Component {
       this.saveSearch = this.saveSearch.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount(){ //Get user's favourite list from firebase database
       fire.database().ref(`${this.props.user.uid}/favourites`).on("value",res => {
         this.setState({favourites: res.val()})
       })
@@ -52,7 +52,7 @@ class Home extends Component {
     return new Date(string).toLocaleDateString([], options);
   }
 
-  handleCheckClick = (item) => {
+  handleCheckClick = (item) => { //Adding and removing a concert in the database
     this.setState({checkBoxChecked: !this.state.checkBoxChecked})
     const fav = fire.database().ref().child(this.props.user.uid).child('favourites').child(item.id)
     if (this.state.favourites){
@@ -66,7 +66,7 @@ class Home extends Component {
     }
   }
 
-  checkFavouriteList(item){
+  checkFavouriteList(item){ //Showing the favourite list as a like button 
     if (this.state.favourites){
       return !!this.state.favourites[item.id]
     }
