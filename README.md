@@ -4,7 +4,7 @@ Firebase hosting: https://ga-world-tour-b8252.web.app/
 ## Technologies 
 - Javascript/HTML/CSS
 - React
-- FireBase
+- FireBase - Authentication Database Storage Hosting
 - BandsInTownAPI https://www.artists.bandsintown.com/support/api-installation
 - Axios
 - UnderScore
