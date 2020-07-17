@@ -40,14 +40,21 @@ function Nav(props) {
                     <img id="logo" src={GAlogo} alt="logo"/>
                     <li className="home_nav" > World Tour</li>
                 </Link>
-                {props.user
-                ? (<Link style={navStyle} to="/profile">
-                    <button className="btn btn-info" onClick={logout}>Logout</button>
-                        <Avatar style={logoStyle} src={dlUrl} round={true}  />
-                    </Link>)
-                : null}
+                <div>
+                    {props.user
+                    ?(<Link style={navStyle} to="/">
+                        <button className="btn btn-info" onClick={logout}>Logout</button>
+                    </Link>) 
+                    : null}
+                    {props.user
+                    ? (<Link style={navStyle} to="/profile">
+                            <Avatar style={logoStyle} src={dlUrl} round={true}  />
+                        </Link>)
+                    : null}
+                </div>
                 
             </ul>
+            
         </nav>
     )
 }

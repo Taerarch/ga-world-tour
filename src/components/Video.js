@@ -40,7 +40,7 @@ const WebcamCapture = (props) => {
           screenshotFormat="image/jpeg"
       />
       <button className="btn btn-info" onClick={capture}>Capture photo</button>
-      <button className="btn btn-info" onClick={download}>Get photo</button>
+      <button className="btn btn-info" onClick={download}>See the photo</button>
       <button className="btn btn-info" onClick={refreshPage}>Apply changes</button>
       
       <img
