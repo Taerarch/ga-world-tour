@@ -1,7 +1,7 @@
 # GA World Tour
 
 
-## Technologies 
+## Technologies
 - React
 - FireBase
 - BandsInTownAPI
@@ -11,4 +11,4 @@
 - React Avatar
 - Bootstrap
 
-## 
+##
