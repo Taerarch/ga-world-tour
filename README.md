@@ -20,3 +20,12 @@ We used React to create the frontend and Firebase for the database storing user 
 
 
 The inbuilt functions from the map allowed us to handle the color changing as well as the drop down information for mouseover on countries.
+
+## To do:
+- Making a list of all liked shows
+- Mobile friendly
+- Use detail maps of more popular countries to show upcoming events
+- Plot route of the band traveling from location to location
+- Move the data of the map to the database
+- Fix the info hover box for countries with many concerts
+
