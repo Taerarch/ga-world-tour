@@ -110,11 +110,11 @@ class WorldMap extends Component {
   _mapTourCountry() {
     const emptyMap = () => {
       const greenWorld = this.state.allCountries
-      // The map function will iterate every country in the world and will paint it green.
+      // The map function will iterate every country in the world and will paint it grey.
       greenWorld.map( (country) => document.getElementById(country.id).style.fill = '#ccc' )
     }
 
-    emptyMap(); // painting the world green before a new search.
+    emptyMap(); // painting the world grey before a new search.
 
     const findYear = this.props.tourCountries.filter((tour) => this.formatYear(tour.datetime) === this.props.year)
     const countryArray = findYear.map((tour) => tour.venue.country)
