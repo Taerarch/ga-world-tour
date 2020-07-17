@@ -23,6 +23,7 @@ The inbuilt functions from the map allowed us to handle the color changing as we
 
 ## To do:
 - Making a list of all liked shows
+- Add music samples for each band
 - Mobile friendly
 - Use detail maps of more popular countries to show upcoming events
 - Plot route of the band traveling from location to location
