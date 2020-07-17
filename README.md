@@ -1,17 +1,17 @@
 # GA World Tour
-
+Firebase hosting: https://ga-world-tour-b8252.web.app/
 
 ## Technologies 
 - Javascript/HTML/CSS
 - React
 - FireBase
-- BandsInTownAPI
+- BandsInTownAPI https://www.artists.bandsintown.com/support/api-installation
 - Axios
 - UnderScore
 - React Webcam
 - React Avatar
 - Bootstrap
-- SVG Map
+- react-svg-map https://github.com/VictorCazanave/react-svg-map
 
 
 ## Summary
