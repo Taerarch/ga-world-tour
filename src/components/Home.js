@@ -33,9 +33,6 @@ class Home extends Component {
     this.child._mapTourCountry()
   }
 
-  logout(){
-    fire.auth().signOut();
-  }
 
   saveSearch(band, year, url) {
     this.setState({band: band, year: year, url: url}, () => {
@@ -80,20 +77,20 @@ class Home extends Component {
     return (
       <div id="main">
         <div id="sideBar">
-          <h1 id="logTitle">You are logged in {this.props.user.email}</h1>
-          <button onClick={this.logout}>Logout</button>
-          <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
-          <button onClick={this.mapClick}>Map Tours</button>
-          <div id="tourList">
-            {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map((t_filtered) => {
-              const isChecked = this.checkFavouriteList(t_filtered)
-              return <p>{t_filtered.venue.city}, {t_filtered.venue.country} {this.formatDate(t_filtered.datetime)} <FormControlLabel
-              control={<Checkbox checked={isChecked} icon={<FavoriteBorder />}
-              onChange={() => this.handleCheckClick(t_filtered)} value={t_filtered}
-              checkedIcon={<Favorite />} name="checkedH" />}
-              />
-              </p>
-          })}
+          <div>
+            <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
+            <button className="btn btn-info" onClick={this.mapClick}>Map Tours</button>
+            <div id="tourList">
+              {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map((t_filtered) => {
+                const isChecked = this.checkFavouriteList(t_filtered)
+                return <p>{t_filtered.venue.city}, {t_filtered.venue.country}<br></br> {this.formatDate(t_filtered.datetime)} <br></br> <FormControlLabel
+                control={<Checkbox checked={isChecked} icon={<FavoriteBorder />}
+                onChange={() => this.handleCheckClick(t_filtered)} value={t_filtered}
+                checkedIcon={<Favorite />} name="checkedH" />}
+                />
+                </p>
+              })}
+            </div>
           </div>
         </div>
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />
@@ -132,10 +129,11 @@ class Search extends Component {
     return (
       <div>
         <form>
-          <label for="band">Band: </label>
-          <input type="text" id="band" name="band" onChange={this._handleChangeBand} value={this.state.content} required></input><br></br>
-          <label for="year">Year: </label>
-          <input type="integer" id="year" name="year" onChange={this._handleChangeTime} value={this.state.content} required></input>
+          
+          <input size="1" type="text" id="band" name="band" onChange={this._handleChangeBand} value={this.state.content} required placeholder="Band..." />
+          
+          <input type="integer" id="year" name="year" onChange={this._handleChangeTime} value={this.state.content} required className="form" placeholder="Year..." />
+
         </form>
       </div>
     )

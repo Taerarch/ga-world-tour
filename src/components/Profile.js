@@ -59,7 +59,8 @@ class Profile extends Component {
     render() {
         return (
             <div className="profile-page">
-                <div>    
+                <div>   
+                    <br/><br/> 
                     <Card style={{ width: '18rem' }}>
                         <Card.Img variant="top" src={this.state.url.i} />
                         <Card.Body>
@@ -89,7 +90,7 @@ class Profile extends Component {
                             <input type="tel" id="number" name="phone" onChange={this._handleChangeNumber} value={this.state.content}></input>
                         </div>
                         <div>
-                            <input type="submit" value="Edit"></input>
+                            <input type="submit" className="btn btn-info" value="Edit"></input>
                         </div>
                         
                     </form>

@@ -11,14 +11,14 @@ svg {
 }
 .svg-map {
   padding: 2em;
-  width: 150vh;
+  width: 100%;
   background-color: lightblue;
 }
 #mapDiv {
-  width: 80%;
+  width: 81%;
   display: inline-block;
-}
-.svg-map__location {
+  border: 5px solid black;
+  border-top: none;
 }
 
 svg .country:hover {
@@ -28,14 +28,18 @@ svg .country:hover {
 }
 
 #sideBar {
-  width: 25vh;
+  width: 26vh;
   display: inline-block;
   vertical-align: top;
-  background-color: white;
   min-height: 100vh;
   padding: 1em;
+  padding-top: 4em;
   text-align: center;
-  border-right: 5px solid black;
+  overflow-y: auto;
+  height: 100px;
+}
+#sideBar input{
+  width: 50%
 }
 
 #root {
@@ -70,11 +74,12 @@ nav {
   display: flex;
   justify-content: space-around;
   min-height: 10vh;
-  background: white;
+  background: black;
+  padding: 1em;
 }
 
 nav :hover{
-  color: coral;
+  color: red;
   text-decoration: none;
 }
 
@@ -85,9 +90,6 @@ nav :hover{
   align-items: center;
   list-style: none;
   margin-bottom: 0px;
-  padding: 1em;
-  padding-left: 10em;
-
 }
 
 .home_nav{
@@ -97,6 +99,7 @@ nav :hover{
   vertical-align: bottom;
   font-family: 'Roboto', sans-serif;
   line-height: 36px;
+  color: white;
 }
 
 #logo {
@@ -108,8 +111,7 @@ nav :hover{
 #webcam{
   display: absolute;
   left: 100px;
-  top: 150px;
-  height: 400px;
+  top: 250px;
   width: 400px;
 }
 
@@ -124,6 +126,7 @@ nav :hover{
 
 #tourList {
   margin-left: 4px;
+  margin-top: 2em;
 }
 
 
@@ -131,32 +134,39 @@ nav :hover{
 #logTitle {
   font-size: 30px;
 }
-
-#main {
-  border: 5px solid black;
-}
-
-@media screen and (max-width: 800px) {
-    #sideBar {
+@media screen and (max-width: 1400px) {
+  #sideBar {
+    vertical-align: top;
+    width: 30vh;
+    min-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    transform: rotate(-90deg);
+  }
+  #sideBar > div {
+    transform: rotate(90deg);
+    transform-origin: right top;
+  }
+  #sideBar input {
+    width: 128px;
+  }
+  #mapDiv {
+    width: 100%;
+  }
+  .svg-map {
+      border-top: 5px solid black;
       width: 100%;
-      min-height: 250px;
-    }
-    #mapDiv {
-      width: 100%
-    }
-    .svg-map {
-        border-top: 5px solid black;
-        width: 100%;
-        position: relative;
-        border-top: none;
-    }
-    .camera{
-      display: inline-block;
-      
-      margin-top: 500px;
-    }
+      position: relative;
+      border-top: none;
+  }
+  .camera{
+    
+    
+    margin-top: 600px;
+  }
 
 }
+
 
 .profile-page{
   display: flex;
@@ -202,5 +212,19 @@ nav :hover{
 
 .camera{
   display: inline-block;
-  margin-left: 500px ;
+  margin-left: 600px ;
+  margin-top: 100px;
+}
+
+.logo{
+  margin: 20px;
+}
+
+.btn{
+  margin: 10px;
+}
+
+.form{
+  width: 160px;
+  margin: 10px;
 }

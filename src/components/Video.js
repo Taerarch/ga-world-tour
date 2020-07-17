@@ -39,9 +39,9 @@ const WebcamCapture = (props) => {
           ref={webcamRef}
           screenshotFormat="image/jpeg"
       />
-      <button onClick={capture}>Capture photo</button>
-      <button onClick={download}>Get photo</button>
-      <button onClick={refreshPage}>Click to reload!</button>
+      <button className="btn btn-info" onClick={capture}>Capture photo</button>
+      <button className="btn btn-info" onClick={download}>Get photo</button>
+      <button className="btn btn-info" onClick={refreshPage}>Apply changes</button>
       
       <img
         src={url || "http://via.placeholder.com/300"}
