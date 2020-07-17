@@ -1,5 +1,5 @@
 # GA World Tour
-Firebase hosting: https://ga-world-tour-b8252.web.app/
+Project link: https://ga-world-tour-b8252.web.app/
 
 ## Technologies
 - Javascript/HTML/CSS
