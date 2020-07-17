@@ -29,4 +29,4 @@ The inbuilt functions from the map allowed us to handle the color changing as we
 - Move the data of the map to the database
 - Fix the info hover box for countries with many concerts
 
-![alt text](https://github.com/Taerarch/ga-world-tour/blob/master/src/screenshot.png?raw=true)
+![alt text](https://github.com/Taerarch/ga-world-tour/blob/master/src/Screenshot.png?raw=true)

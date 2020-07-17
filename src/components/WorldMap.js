@@ -70,11 +70,7 @@ class WorldMap extends Component {
   _handleMouseOver(event) { //set the state of pointedLocation and filters the concerts for the hover info.
     const pointedLocation = getLocationName(event);
     const filterYear = this.props.tourCountries.filter( (tour) => this.formatYear(tour.datetime) === this.props.year);
-    const filterCountry = _.filter(filterYear, (tour) => {
-      if (tour.venue.country === pointedLocation) {
-        return tour //only when the mouse is over a country with concerts it will return their info
-      }}
-    );
+
     this.setState({
       pointedLocation : pointedLocation,
     });
