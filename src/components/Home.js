@@ -10,16 +10,16 @@ import FavoriteBorder from '@material-ui/icons/FavoriteBorder';
 
 class Home extends Component {
   constructor(props){
-      super(props)
-      this.state={
-        tours: [],
-        band: "",
-        url: ``,
-        year: "",
-        checkBoxChecked: [],
-        favourites: {}
-      }
-      this.saveSearch = this.saveSearch.bind(this);
+    super(props)
+    this.state={
+      tours: [], // info from the api
+      band: "", // Band doing the tour
+      url: ``, // url of bandsintown api
+      year: "", // Year of the tour
+      checkBoxChecked: [], // checks if a concert has been liked or not
+      favourites: {} // liked concerts
+    }
+    this.saveSearch = this.saveSearch.bind(this);
   }
 
   componentDidMount(){ //Get user's favourite list from firebase database
@@ -34,25 +34,27 @@ class Home extends Component {
   }
 
 
-  saveSearch(band, year, url) {
+  saveSearch(band, year, url) { // saves the parameters of the search in the state
     this.setState({band: band, year: year, url: url}, () => {
+      // and makes the axios requets to the api
       axios.get(this.state.url).then((results) => {
+        // and saves the data from the api in the state
         this.setState({ tours: results.data })
       })
     })
   }
 
-  formatYear(string) {
+  formatYear(string) { // formats date to get the year
     var options = { year: 'numeric' };
     return new Date(string).toLocaleDateString([], options);
   }
 
-  formatDate(string) {
+  formatDate(string) { // formats the date dd/mmmm/yyyy
     var options = { year: 'numeric', month: 'long', day: 'numeric' };
     return new Date(string).toLocaleDateString([], options);
   }
 
-  handleCheckClick = (item) => { //Adding and removing a concert in the database
+  handleCheckClick = (item) => { // checks if the user likes or dislikes a concerts and saves it in the database
     this.setState({checkBoxChecked: !this.state.checkBoxChecked})
     const fav = fire.database().ref().child(this.props.user.uid).child('favourites').child(item.id)
     if (this.state.favourites){
@@ -66,7 +68,7 @@ class Home extends Component {
     }
   }
 
-  checkFavouriteList(item){ //Showing the favourite list as a like button 
+  checkFavouriteList(item){ // checks if a particular concert has been liked or not
     if (this.state.favourites){
       return !!this.state.favourites[item.id]
     }
@@ -93,6 +95,7 @@ class Home extends Component {
             </div>
           </div>
         </div>
+        {/* passes the tour info as a prop to the Map component */}
         <Map tourCountries={this.state.tours} year={this.state.year} onRef={ref => (this.child = ref)} />
       </div>
     )
@@ -108,18 +111,18 @@ class Search extends Component {
     this._handleSubmit = this._handleSubmit.bind(this);
   }
 
-  _handleChangeBand(event) {
+  _handleChangeBand(event) { // gets the band name from the user and creates the url for the api
     this.setState({
       band: event.target.value,
       url: `https://rest.bandsintown.com/artists/${event.target.value}/events?app_id=d2f84baa059b6c4e9357a1726db9c11d&date=`
     }, () => this._handleSubmit());
   }
 
-  _handleChangeTime(event) {
+  _handleChangeTime(event) { // gets the year of the tour from the user
     this.setState({ year: event.target.value }, () => this._handleSubmit())
   }
 
-  _handleSubmit(event) {
+  _handleSubmit(event) { // handles the form submission
     this.props.onSubmit(this.state.band, this.state.year, this.state.url + this.state.year);
   }
 
