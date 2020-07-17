@@ -1,7 +1,7 @@
 # GA World Tour
 Firebase hosting: https://ga-world-tour-b8252.web.app/
 
-## Technologies 
+## Technologies
 - Javascript/HTML/CSS
 - React
 - FireBase
@@ -29,3 +29,4 @@ The inbuilt functions from the map allowed us to handle the color changing as we
 - Move the data of the map to the database
 - Fix the info hover box for countries with many concerts
 
+![alt text](https://github.com/Taerarch/ga-world-tour/blob/master/src/screenshot.png?raw=true)
