@@ -7,18 +7,22 @@ import {storage} from './fire'
 import GAlogo from '../GAlogo.png'
 
 function Nav(props) {
-  const navStyle={
+  const navStyle={ //Styles
     color: 'black',
     textDecoration: 'none',
     fontWeight: "bold"
   }
+  const logoStyle={
+    marginLeft: "40px"
+  }
 
   const [dlUrl, setUrl] = React.useState("");
 
-  const logout = () => {
+  const logout = () => { //Signout 
     fire.auth().signOut();
   }
 
+  //Get the profile picture for navbar avatar
   let downloadTask = null;
   if (props.user !== null){
     downloadTask = storage.ref(`images/${props.user.uid}`);
@@ -30,21 +34,28 @@ function Nav(props) {
     })
   }
 
-
   return (
     <nav>
       <ul className="nav-links">
         <Link style={navStyle} to="/">
-          <img id="logo" src={GAlogo} />
+          <img id="logo" src={GAlogo} alt="logo"/>
           <li className="home_nav" > World Tour</li>
         </Link>
-        {props.user
-          ? (<Link  style={navStyle} to="/profile">
-                <Avatar src={dlUrl} round={true}  />
-            </Link>)
+        <div>
+          {props.user
+          ?(<Link style={navStyle} to="/">
+              <button className="btn btn-info" onClick={logout}>Logout</button>
+          </Link>) 
           : null}
-        <button onClick={logout}>Logout</button>
+          {props.user
+          ? (<Link style={navStyle} to="/profile">
+                  <Avatar style={logoStyle} src={dlUrl} round={true}  />
+              </Link>)
+          : null}
+        </div>
+          
       </ul>
+          
     </nav>
   )
 }

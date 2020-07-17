@@ -16,14 +16,14 @@ class Signup extends Component {
     }
   }
 
-  signup(e){
+  signup(e){ //Sigup the user and create in firebase Authentication 
     e.preventDefault();
     fire.auth().createUserWithEmailAndPassword(this.state.email,this.state.password)
     .then((u)=>{
       this.setState({message: "Signed up"})
       this.props.history.push("/")
     })
-    .catch((err)=>{
+    .catch((err)=>{  //Performing all necessary validation and return the message
       this.setState({message: err.message})
     })
   }
@@ -36,7 +36,7 @@ class Signup extends Component {
 
   handleSubmit(e) {
     const { password, confirmPassword } = this.state;
-    // perform all neccassary validations
+    //Perform confirm password validation and return the message
     if (password !== confirmPassword) {
       e.preventDefault();
       this.setState({message: "Passwords don't match"})
@@ -77,3 +77,4 @@ class Signup extends Component {
   }
 }
 export default withRouter(Signup)
+

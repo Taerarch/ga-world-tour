@@ -19,16 +19,16 @@ class Profile extends Component {
     this._handleChangeNumber = this._handleChangeNumber.bind(this);
     this._handleSubmit = this._handleSubmit.bind(this);
     let downloadTask = null;
-    if (props.user !== null){
+    if (props.user !== null){ //Check if the user is loged in or not.
       downloadTask = storage.ref(`images/${props.user.uid}`);
     }
 
-    if (downloadTask !== null){
+    if (downloadTask !== null){ //Check if there is a profile picture for this user or not.
       this.state.url = downloadTask.getDownloadURL()
     }
   }
 
-  componentDidMount(){
+  componentDidMount(){ //Set name and number if available
     this.name.on('value', snap =>{
       this.setState({
         name: snap.val()
@@ -50,7 +50,7 @@ class Profile extends Component {
     this.setState({number: event.target.value})
   }
 
-  _handleSubmit(event) {
+  _handleSubmit(event) { //Save name and number in database
     event.preventDefault();
     fire.database().ref().child(this.props.user.uid).child('name').set(this.state.name)
     fire.database().ref().child(this.props.user.uid).child('number').set(this.state.number)

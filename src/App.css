@@ -134,7 +134,9 @@ svg .country:hover {
   margin-bottom: 20px;
 }
 #webcam{
-  height: 400px;
+  display: absolute;
+  left: 100px;
+  top: 250px;
   width: 400px;
 }
 #image{
@@ -152,6 +154,37 @@ svg .country:hover {
 #logTitle {
   font-size: 30px;
 }
+.camera{
+  display: inline-block;
+  margin-left: 600px ;
+  margin-top: 100px;
+}
+
+
+.login{
+  max-width: 500px;
+  margin: auto;
+}
+
+.error{
+  color: darkred;
+}
+
+
+
+.logo{
+  margin: 20px;
+}
+
+.btn{
+  margin: 10px;
+}
+
+.form{
+  width: 160px;
+  margin: 10px;
+}
+
 @media screen and (max-width: 1400px) {
   #sideBar {
     width: 100%;
@@ -169,5 +202,18 @@ svg .country:hover {
       border-top: 5px solid black;
       width: 100%;
       position: relative;
+  }
+
+  .camera{
+    display: inline-block;
+    margin-left: 50px ;
+    margin-top: 450px;
+  }
+
+  #webcam{
+    display: absolute;
+    left: 40px;
+    top: 250px;
+    width: 400px;
   }
 }

@@ -13,7 +13,7 @@ class Login extends Component {
     }
   }
 
-  login(e){
+  login(e){ //Login and read the user from firebase Authentication
     e.preventDefault();
     fire.auth().signInWithEmailAndPassword(this.state.email,this.state.password).then((u)=>{
       this.setState({message: u.message})

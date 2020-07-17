@@ -22,12 +22,10 @@ class Home extends Component {
     this.saveSearch = this.saveSearch.bind(this);
   }
 
-  componentDidMount(){
-    fire.database()
-    .ref(`${this.props.user.uid}/favourites`)
-    .on("value",res => {
-      this.setState({favourites: res.val()})
-    })
+  componentDidMount(){ //Get user's favourite list from firebase database
+      fire.database().ref(`${this.props.user.uid}/favourites`).on("value",res => {
+        this.setState({favourites: res.val()})
+      })
 
   }
 
@@ -83,7 +81,7 @@ class Home extends Component {
         <div id="sideBar">
           <div>
             <Search onSubmit={this.saveSearch} year={this.state.year} onRef={ref => (this.child = ref)}/>
-            <button onClick={this.mapClick}>Map Tours</button>
+            <button className="btn btn-info" onClick={this.mapClick}>Map Tours</button>
             <div id="tourList">
               {this.state.tours.filter((t) => this.formatYear(t.datetime) === this.state.year).map((t_filtered) => {
                 const isChecked = this.checkFavouriteList(t_filtered)
@@ -135,10 +133,11 @@ class Search extends Component {
       <div>
         <h3 id="searchHead">Tour Search</h3>
         <form>
-          <label for="band">Band </label><br></br>
-          <input type="text" id="band" name="band" onChange={this._handleChangeBand} value={this.state.content} required></input><br></br>
-          <label for="year">Year </label><br></br>
-          <input type="integer" id="year" name="year" onChange={this._handleChangeTime} value={this.state.content} required></input>
+          
+          <input size="1" type="text" id="band" name="band" onChange={this._handleChangeBand} value={this.state.content} required placeholder="Band..." />
+          
+          <input type="number" id="year" name="year" onChange={this._handleChangeTime} value={this.state.content} required className="form" placeholder="Year..." />
+
         </form>
       </div>
     )
