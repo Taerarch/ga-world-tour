@@ -128,10 +128,11 @@ class Search extends Component {
   render() {
     return (
       <div>
+        <h3 id="searchHead">Tour Search</h3>
         <form>
-          <label for="band">Band: </label>
+          <label for="band">Band </label><br></br>
           <input type="text" id="band" name="band" onChange={this._handleChangeBand} value={this.state.content} required></input><br></br>
-          <label for="year">Year: </label>
+          <label for="year">Year </label><br></br>
           <input type="integer" id="year" name="year" onChange={this._handleChangeTime} value={this.state.content} required></input>
         </form>
       </div>
